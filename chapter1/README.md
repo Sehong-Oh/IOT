@@ -214,7 +214,28 @@ if (user !== user2) {
 
 ### 예제 1-14
 ```
+var user = {
+    name: 'Jaenam',
+    urls: {
+      portfolio: 'http://github.com/abc',
+      blog: 'http://blog.com',
+      facebook: 'http://facebook.com/abc',
+    },
+  };
+  var user2 = copyObject(user); //얕은 복사만 수행함
+  user2.name = 'Jung';
+  
+  console.log(user.name === user2.name); // false
+  
+  
+  user.urls.portfolio = 'http://portfolio.com';
+  console.log(user.urls.portfolio === user2.urls.portfolio); // true
+  
+  user2.urls.blog = '';
+  console.log(user.urls.blog === user2.urls.blog); // true
 ```
+- 이 예제는 얕은 복사의 한계를 명확히 보여준다. 중첩된 객체는 여전히 원본과 복사본 간에 공유되어, 한쪽의 변경이 다른 쪽에도 영향을 미친다.  
+이러한 문제를 해결하기 위해서는 깊은 복사(Deep Copy)가 필요하다.
 
 ### 예제 1-15
 ```
