@@ -107,8 +107,19 @@ function a() {
 
 ### 예제 2-7
 ```javascript
-
+function a() {
+    var b;
+    var b = function b() {}; // 변경된 부분
+  
+    console.log(b);
+    b = 'bbb';
+    console.log(b);
+    console.log(b);
+  }
+  a();
 ```
+- 이 코드는 함수 표현식을 사용했을 때의 호이스팅 동작을 보여준다. 변수 `b`가 선언되고, 함수 표현식이 `b`에 할당된다. 함수 표현식은 변수에 할당되는 값이므로, 변수 선언(`var b`)만 호이스팅되고 함수 할당은 원래 위치에서 이루어진다.  
+- 첫 번째 `console.log`에서는 함수 객체가 출력되고, `b`에 'bbb'가 할당된 후에는 두 번째와 세 번째 `console.log`에서 모두 'bbb'가 출력된다. 이는 함수 표현식의 호이스팅이 함수 선언문과 다르게 동작함을 보여준다.
 
 ### 예제 2-8
 ```javascript
