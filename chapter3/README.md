@@ -372,8 +372,19 @@ console.log(max, min);
 
 ### 예제 3-25
 ```javascript
+var func = function(a, b, c, d) {
+    console.log(this, a, b, c, d);
+};
+func(1, 2, 3, 4);
 
+var bindFunc1 = func.bind({ x: 1 });
+bindFunc1(5, 6, 7, 8);
+
+var bindFunc2 = func.bind({ x: 1 }, 4, 5);
+bindFunc2(6, 7);
+bindFunc2(8, 9);
 ```
+-`bind` 메서드의 기본 사용법을 알 수 있다. `bind`는 함수에 `this`와 일부 인자를 미리 바인딩한 새 함수를 반환한다. `func.bind({ x: 1 })`는 `this`가 `{ x: 1 }`로 고정된 새 함수 `bindFunc1`을 반환한다. `func.bind({ x: 1 }, 4, 5)`는 `this`뿐만 아니라 첫 두 인자도 4, 5로 고정된 함수 `bindFunc2`를 반환한다. 이렇게 생성된 함수를 호출하면 미리 바인딩된 `this`와 인자들이 사용된다.
 
 ### 예제 3-26
 ```javascript
