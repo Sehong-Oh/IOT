@@ -258,5 +258,15 @@ outer();
 
 ### 예제 2-16
 ```javascript
-
+var a = 1;
+var outer = function() {
+  var b = 2;
+  var inner = function() {
+    console.log(b);
+    debugger;
+  };
+  inner();
+};
+outer();
 ```
+- `debugger` 문을 사용하여 브라우저 개발자 도구에서 코드 실행을 중단시키는 방법을 보여준다. 전역 변수 `a`, `outer` 함수의 지역 변수 `b`, 그리고 `inner` 함수가 있다. `inner` 함수에서 외부 변수 `b`에 접근하고 `debugger` 문을 실행한다. 이 지점에서 코드 실행이 중단되면 브라우저 개발자 도구를 통해 현재 스코프, 변수 값, 클로저 등을 직접 확인할 수 있다.
