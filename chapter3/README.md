@@ -129,7 +129,7 @@ var obj1 = {
 };
 obj1.outer();
 ```
-- obj1.outer()` 호출 시 `outer` 함수 내부에서 `this`는 `obj1`을 가리킨다(1). 그러나 `outer` 내부에서 정의된 `innerFunc`를 일반 함수로 호출하면(`innerFunc()`) `this`는 전역 객체를 가리킨다(2). 같은 함수라도 `obj2.innerMethod()`처럼 객체의 메서드로 호출하면 `this`는 해당 객체(`obj2`)를 가리킨다(3). 이는 `this`가 함수를 어떻게 호출하느냐에 따라 동적으로 결정됨을 보여준다.
+- `obj1.outer()` 호출 시 `outer` 함수 내부에서 `this`는 `obj1`을 가리킨다(1). 그러나 `outer` 내부에서 정의된 `innerFunc`를 일반 함수로 호출하면(`innerFunc()`) `this`는 전역 객체를 가리킨다(2). 같은 함수라도 `obj2.innerMethod()`처럼 객체의 메서드로 호출하면 `this`는 해당 객체(`obj2`)를 가리킨다(3). 이는 `this`가 함수를 어떻게 호출하느냐에 따라 동적으로 결정됨을 보여준다.
 
 ### 예제 3-10
 ```javascript
