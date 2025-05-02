@@ -192,7 +192,25 @@ var copyObject = function (target) {
 
 ### 예제 1-13
 ```
+var user = {
+    name: 'Jaenam',
+    gender: 'male'
+}
+
+var user2 = copyObject(user);
+user2.name = 'Jung';
+
+if (user !== user2) {
+    console.log('유저 정보가 변경되었습니다');
+}
+
+// console.log(user.name, user2.name);
+// console.log(user == user2);
 ```
+- 앞서 정의한 copyObject 함수를 사용하여 객체의 얕은 복사를 수행하고 그 결과를 보여준다:  
+- 얕은 복사 사용 : var user2 = copyObject(user); 구문으로 user 객체를 복사하여 새로운 user2 객체를 생성한다.  
+이 때 얕은 복사가 이루어져 두 객체는 별도의 메모리 공간을 차지한다.
+- 복사본 수정 : user2.name = 'Jung';으로 복사된 객체의 name 속성을 변경한다. 원본 객체(user)는 영향을 받지 않고 그대로 유지된다.
 
 ### 예제 1-14
 ```
