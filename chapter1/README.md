@@ -352,7 +352,18 @@ console.log(c);
 
 ### 예제 1-20
 ```
+var arr1 = [];
+arr1.length = 3;
+console.log(arr1);
+
+var arr2 = new Array(3);
+console.log(arr2);
+
+var arr3 = [undefined,undefined,undefined];
+console.log(arr3);
 ```
+- 빈 슬롯(empty slots)과 undefined 값은 다르다. 빈 슬롯은 메모리에 할당되지 않은 위치이며, undefined는 실제로 존재하는 값이다.
+- 이 차이는 배열 메서드 사용 시 중요해질 수 있다. 예를 들어, `forEach`, `map` 등의 메서드는 빈 슬롯을 건너뛰지만 undefined 값은 처리한다.
 
 ### 예제 1-21
 ```
