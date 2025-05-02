@@ -54,9 +54,22 @@ function a() {
 
 ### 예제 2-4
 ```javascript
-
+function a() {
+    var x;
+    var x;
+    var x;
+  
+    x = 1;
+    console.log(x);
+    console.log(x);
+    x = 2;
+    console.log(x);
+  }
+  
+  a(1);
 ```
-
+- 호이스팅의 실제 동작을 명시적으로 표현한 것이다. JavaScript 엔진은 실행 전에 모든 변수 선언(`var x`)을 함수 상단으로 끌어올리고, 중복 선언은 하나로 통합한다.
+- 이후 할당문(`x = 1`, `x = 2`)은 원래 위치에서 순차적으로 실행된다. 따라서 세 번의 `console.log`에서 각각 1, 1, 2가 출력된다. 이 예제를 통해 변수 선언과 할당이 분리되어 처리됨을 명확하게 볼 수 있다.
 
 ### 예제 2-5
 ```javascript
