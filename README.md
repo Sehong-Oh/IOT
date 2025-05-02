@@ -2,18 +2,10 @@
 ## 오세홍
 
 ## Chapter1
-### 예제 1-1
-- 변경가능한 데이터가 담길 수 있는 공간을 생성 (a : 식별자)
-```
-var a;
-```
+- [Chapter1 이동](./chapter1/README.md)  
 
-### 예제 1-2
-```javascript
-// 예제 1-2
-a = 'abc';
-var a = 'abc';
-```
+## Chapter2
+- [Chapter2 이동](./chapter2/README.md)  
 
-a = 'abc'; - 선언 없이 변수에 직접 값을 할당하는 방식이다. 이 경우, 변수 a는 글로벌 스코프에 암묵적으로 생성된다. 이것은 '암시적 전역 변수'라고도 불리며, 원래 의도와 다르게 작동할 수 있어 좋은 관행이 아니다.
-var a = 'abc'; - var 키워드를 사용하여 변수를 명시적으로 선언하고 값을 할당하는 방식이다. 이 방식이 더 명확하고 안전하다.
+## Chapter3
+- [Chapter3 이동](./chapter3/README.md)
