@@ -200,8 +200,14 @@ console.log(choco, nabi);
 
 ### 예제 3-14
 ```javascript
+var func = function(a, b, c) {
+    console.log(this, a, b, c);
+};
 
+func(1, 2, 3);
+func.call({ x: 1 }, 4,5,6);
 ```
+- 코드는 `call` 메서드를 사용하여 함수의 `this`를 명시적으로 바인딩하는 방법을 보여준다. 일반 함수로 호출된 `func(1, 2, 3)`에서 `this`는 전역 객체를 가리킨다. 반면 `func.call({ x: 1 }, 4, 5, 6)`에서는 `this`가 `{ x: 1 }` 객체를 가리키고, 인자로 4, 5, 6이 전달된다. `call` 메서드는 첫 번째 인자로 `this`로 사용할 객체를 받고, 이후 인자들은 함수의 매개변수로 순서대로 전달된다.
 
 ### 예제 3-15
 ```javascript
