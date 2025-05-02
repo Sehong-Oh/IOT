@@ -42,8 +42,23 @@ console.log(b, window.b, this.b);
 
 ### 예제 3-5
 ```javascript
+var a = 1;
+delete window.a;
+console.log(a, window.a, this.a);
 
+var b = 2;
+delete b;
+console.log(b, window.b, this.b);
+
+window.c = 3;
+delete window.c;
+console.log(c, window.c, this.c);
+
+window.d = 4;
+delete d;
+console.log(d, window.d, this.d);
 ```
+- 위 코드는 `var`로 선언된 전역 변수와 직접 전역 객체에 할당된 프로퍼티의 삭제 가능성 차이를 보여준다. `var`로 선언된 변수 `a`와 `b`는 `delete` 연산자로 삭제할 수 없으며(`delete window.a`와 `delete b`는 `false` 반환), 직접 전역 객체에 할당한 프로퍼티 `c`와 `d`는 삭제할 수 있다(`delete window.c`와 `delete d`는 `true` 반환). 삭제 후에는 `c`와 `d`에 접근하면 ReferenceError가 발생한다.
 
 ### 예제 3-6
 ```javascript
