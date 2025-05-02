@@ -243,8 +243,18 @@ outer();
 
 ### 예제 2-15
 ```javascript
-
+var a = 1;
+var outer = function() {
+  var b = 2;
+  var inner = function() {
+    console.log(b);
+    console.dir(inner);
+  };
+  inner();
+};
+outer();
 ```
+- 전역 변수 `a`, `outer` 함수의 지역 변수 `b`, 그리고 `outer` 내부의 `inner` 함수가 있다. `inner` 함수는 자신의 스코프에 없는 변수 `b`를 외부 함수인 `outer`의 스코프에서 찾아 사용한다(`console.log(b)`). 또한 `console.dir(inner)`를 통해 `inner` 함수의 클로저 정보를 출력한다. 이는 함수가 자신이 선언된 렉시컬 환경의 변수에 접근할 수 있는 클로저의 핵심 개념을 보여준다.
 
 ### 예제 2-16
 ```javascript
