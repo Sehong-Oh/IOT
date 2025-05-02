@@ -327,7 +327,28 @@ JSON을 이용한 간편한 깊은 복사:
 
 ### 예제 1-19
 ```
+var a;
+console.log(a); 
+
+var obj = { a: 1 };
+console.log(obj.a); 
+console.log(obj.b);
+console.log(b);
+
+var func = function() { };
+var c = func();
+console.log(c);
 ```
+- 자동으로 undefined가 할당되는 여러 상황을 보여준다:  
+- 변수 선언 후 할당하지 않은 경우:  
+  -`var a;`로 변수를 선언만 하고 값을 할당하지 않으면 자동으로 undefined가 된다. `console.log(a);`는 undefined를 출력한다.  
+- 객체의 존재하지 않는 프로퍼티에 접근할 경우:
+  -`console.log(obj.b);`에서 obj 객체에 b 프로퍼티가 없으므로 undefined를 반환한다. 이는 오류를 발생시키지 않고 undefined를 반환한다.  
+- 선언되지 않은 변수에 접근하는 경우:  
+  - `console.log(b);`에서 b 변수는 선언되지 않았으므로 ReferenceError가 발생한다.이 경우는 undefined가 아닌 오류를 발생시킨다.
+- 반환값이 없는 함수의 결과:  
+  - `var func = function() { };`는 아무것도 반환하지 않는 함수를 정의한다. `var c = func();`로 함수를 호출하고 결과를 c에 할당한다. 반환값이 명시되지 않은 함수는 자동으로 undefined를 반환하므로, `console.log(c);`는 undefined를 출력한다.
+
 
 ### 예제 1-20
 ```
