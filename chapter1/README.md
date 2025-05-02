@@ -239,7 +239,19 @@ var user = {
 
 ### 예제 1-15
 ```
+var user2 = copyObject(user);
+user2.urls = copyObject(user.urls);
+
+user.urls.portfolio = "http://portfolio.com";
+console.log(user.urls.portfolio == user2.urls.portfolio)
+
+user2.urls.blog = '';
+console.log(user2.urls.blog)
+console.log(user.urls.blog)
+console.log(user.urls.blog == user2.urls.blog);
 ```
+- 이 방식은 특정 중첩 레벨까지만 깊은 복사를 구현한 접근법이다. 중첩 객체를 수동으로 복사함으로써 각 객체가 독립적으로 동작하도록 한다. 
+- 그러나 이 방식은 객체의 모든 중첩 레벨을 일일이 복사해야 하므로 객체 구조가 복잡할수록 코드가 번거로워진다.
 
 ### 예제 1-16
 ```
