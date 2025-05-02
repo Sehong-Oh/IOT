@@ -120,7 +120,29 @@ obj2 = {c:20, d: 'ddd'};
 
 ### 예제 1-10
 ```
+var user = {
+    name: 'Jaenam',
+    gender: 'male'
+}
+
+var changeName = function (user, newName) {
+    var newUser = user;
+    newUser.name = newName;
+    return newUser;
+};
+
+var user2 = changeName(user, 'Jung');
+
+if (user !== user2) {
+    console.log('유저 정보가 변경되었습니다.');
+}
+
+// console.log(user.name, user2.name);
+// console.log(user == user2);
+
 ```
+- changeName 함수는 사용자의 이름을 변경한 새 객체를 반환하려는 함수이다. 하지만 var newUser = user;는 새 객체를 생성하지 않고 단순히 참조를 복사한다.  
+따라서 newUser.name = newName;은 원본 객체인 user의 name 속성도 함께 변경한다.
 
 ### 예제 1-11
 ```
