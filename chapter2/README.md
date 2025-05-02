@@ -190,8 +190,24 @@ console.log(c);
 
 ### 예제 2-12
 ```javascript
+console.log(sum(3, 4));
 
+var sum = function(x, y) {
+  return x + y
+};
+
+var a = sum(1, 2);
+
+var sum = function(x, y) {
+  return x + ' + ' + y + ' = ' + (x + y)
+};
+
+var c = sum(1, 2);
+
+console.log(c);
 ```
+- 변수 선언(`var sum`)만 호이스팅되고 초기화는 안 된 상태에서 첫 `console.log(sum(3, 4))`가 실행되므로, undefined를 함수처럼 호출하려고 해서 TypeError가 발생한다. 이후 `sum` 함수가 두 번 정의되면서, 나중에 정의된 함수가 이전 함수를 덮어쓴다.  
+- 따라서 `c`에는 "1 + 2 = 3" 형태의 결과가 할당된다.
 
 ### 예제 2-13
 ```javascript
