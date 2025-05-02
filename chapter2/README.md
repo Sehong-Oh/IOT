@@ -73,8 +73,19 @@ function a() {
 
 ### 예제 2-5
 ```javascript
-
+function a() {
+    console.log(b);
+    var b = 'bbb'; // 변수선언
+    console.log(b);
+    function b() {} // 함수선언
+    console.log(b);
+  }
+  a();
 ```
+- 변수 선언과 함수 선언이 동일한 이름으로 존재할 때의 호이스팅 우선순위를 보여준다. 
+- 함수 선언(`function b(){}`)은 변수 선언(`var b`)보다 우선적으로 호이스팅되므로, 첫 번째 `console.log`에서는 함수 객체 자체가 출력된다. 이후 'bbb' 값이 `b`에 할당되면 변수 값이 함수를 덮어쓴다. 
+- 따라서 두 번째와 세 번째 `console.log`에서는 모두 'bbb'가 출력된다. 이는 함수 선언과 변수 선언의 호이스팅 우선순위 차이를 명확하게 보여준다.
+
 
 
 ### 예제 2-6
