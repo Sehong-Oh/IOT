@@ -363,8 +363,12 @@ console.log(max, min);
 
 ### 예제 3-24
 ```javascript
-
+const numbers = [10, 20, 3, 16, 45];
+const max = Math.max(...numbers);
+const min = Math.min(...numbers);
+console.log(max, min);
 ```
+- ES6의 스프레드 연산자(`...`)를 사용하여 배열의 최대값과 최소값을 찾는 현대적 방법이다. `Math.max(...numbers)`는 `numbers` 배열의 요소들을 펼쳐서 `Math.max` 함수의 개별 인자로 전달한다. 이는 3-23의 `apply` 방식보다 더 직관적이고 간결하다. 
 
 ### 예제 3-25
 ```javascript
