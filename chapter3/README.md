@@ -129,12 +129,27 @@ var obj1 = {
 };
 obj1.outer();
 ```
-- `obj1.outer()` 호출 시 `outer` 함수 내부에서 `this`는 `obj1`을 가리킨다(1). 그러나 `outer` 내부에서 정의된 `innerFunc`를 일반 함수로 호출하면(`innerFunc()`) `this`는 전역 객체를 가리킨다(2). 같은 함수라도 `obj2.innerMethod()`처럼 객체의 메서드로 호출하면 `this`는 해당 객체(`obj2`)를 가리킨다(3). 이는 `this`가 함수를 어떻게 호출하느냐에 따라 동적으로 결정됨을 보여준다.
+- `obj1.outer()` 호출 시 `outer` 함수 내부에서 `this`는 `obj1`을 가리킨다. 그러나 `outer` 내부에서 정의된 `innerFunc`를 일반 함수로 호출하면(`innerFunc()`) `this`는 전역 객체를 가리킨다. 같은 함수라도 `obj2.innerMethod()`처럼 객체의 메서드로 호출하면 `this`는 해당 객체(`obj2`)를 가리킨다. 이는 `this`가 함수를 어떻게 호출하느냐에 따라 동적으로 결정됨을 보여준다.
 
 ### 예제 3-10
 ```javascript
-
+var obj1 = {
+    outer: function() {
+      console.log(this);
+      var innerFunc = function() {
+        console.log(this);
+      }
+      innerFunc();
+  
+      var obj2 = {
+        innerMethod: innerFunc,
+      };
+      obj2.innerMethod();
+    }
+};
+obj1.outer();
 ```
+-중첩 함수에서 `this`를 우회하는 방법을 보여준다. `obj.outer()` 호출 시 `outer` 내부에서 `this`는 `obj`를 가리킨다. 그러나 내부 함수 `innerFunc1()`에서 `this`는 전역 객체를 가리킨다. 이 문제를 해결하기 위해 `outer` 함수에서 `this`를 변수 `self`에 저장한 후, `innerFunc2` 내부에서 `self`를 참조하면 `obj`에 접근할 수 있다. 이 패턴은 내부 함수에서 외부 함수의 `this`를 사용해야 할 때 자주 활용된다.
 
 ### 예제 3-11
 ```javascript
