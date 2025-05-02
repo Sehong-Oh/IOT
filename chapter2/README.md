@@ -228,8 +228,18 @@ console.log(a);
 
 ### 예제 2-14
 ```javascript
-
+var a = 1;
+var outer = function() {
+  var b = 2;
+  var inner = function() {
+    console.dir(inner);
+  };
+  inner();
+};
+outer();
 ```
+- 이 코드는 `console.dir`를 사용하여 함수 객체의 내부 구조를 확인하는 방법을 보여준다. 전역 변수 `a`와 `outer` 함수의 지역 변수 `b`가 선언되고, `inner` 함수에서 `console.dir(inner)`를 실행한다. 이는 `inner` 함수 객체의 속성들(스코프 체인, 클로저 등)을 콘솔에 출력한다. 이 결과를 통해 함수가 생성될 때의 렉시컬 환경과 함수 객체의 내부 구조를 확인할 수 있다.
+
 
 ### 예제 2-15
 ```javascript
