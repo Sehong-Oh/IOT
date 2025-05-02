@@ -259,8 +259,22 @@ console.log(arr);
 
 ### 예제 3-18
 ```javascript
+function a() {
+    var argv = Array.prototype.slice.call(arguments);
+    argv.forEach(function(arg) {
+        console.log(arg);
+    });
+}
+a(1, 2, 3);
 
+document.body.innerHTML = '<div>a</div><div>b</div><div>c</div>';
+var nodeList = document.querySelectorAll('div');
+var nodeArr = Array.prototype.slice.call(nodeList);
+nodeArr.forEach(function(node) {
+    console.log(node);
+});
 ```
+- 이 코드는 유사 배열 객체를 배열로 변환하는 실용적인 예시를 보여준다. 함수 `a` 내에서 `arguments` 객체(함수에 전달된 인자들을 담은 유사 배열 객체)를 `Array.prototype.slice.call(arguments)`를 통해 실제 배열로 변환한다. 마찬가지로 DOM의 `NodeList`(여기서는 `document.querySelectorAll('div')` 결과)도 같은 방식으로 배열로 변환하여 배열 메서드(`forEach`)를 사용할 수 있게 한다.
 
 ### 예제 3-19
 ```javascript
