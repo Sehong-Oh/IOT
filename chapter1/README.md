@@ -398,4 +398,13 @@ arr2.reduce(function(p, c, i) {return p + c + i;}, '');
 
 ### 예제 1-22
 ```
+var n = null;
+console.log(typeof n);
+console.log(n == undefined);
+console.log(n == null);
+console.log(n === undefined);
+console.log(n === null);
+// 순서대로 "object", "true", "true", "false", "true"
 ```
+ - null과 undefined는 유사하지만 다른 값이다. null은 명시적인 '빈 값'을 나타내며, undefined는 값이 할당되지 않은 상태를 나타낸다.
+ - 코드 작성 시 이 차이를 이해하고 적절한 비교 연산자를 선택하는 것이 중요하다.
