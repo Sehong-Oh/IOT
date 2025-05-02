@@ -169,8 +169,24 @@ var sum = function sum(a, b) {
 
 ### 예제 2-11
 ```javascript
+console.log(sum(3, 4));
+
+function sum(x, y) {
+  return x + y
+}
+
+var a = sum(1, 2);
+
+function sum(x, y) {
+  return x + ' + ' + y + ' = ' + (x + y)
+}
+
+var c = sum(1, 2);
+
+console.log(c);
 
 ```
+- 같은 이름의 함수 `sum`이 두 번 선언되면, 나중에 선언된 함수가 이전 함수를 완전히 덮어쓴다. 호이스팅 과정에서 마지막 선언이 우선되므로, 첫 번째 `console.log(sum(3, 4))`에서도 두 번째로 정의된 함수의 형태("3 + 4 = 7")로 출력된다.
 
 ### 예제 2-12
 ```javascript
