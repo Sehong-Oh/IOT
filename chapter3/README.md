@@ -310,12 +310,30 @@ var obj = {
 var arr = Array.from(obj);
 console.log(arr);
 ```
-- ES6에서 도입된 `Array.from` 메서드를 사용하여 유사 배열 객체를 배열로 변환하는 방법을 보여준다. `Array.from(obj)`는 유사 배열 객체 `obj`를 진짜 배열로 변환한다. 이는 이전 예제에서 본 `Array.prototype.slice.call(obj)` 패턴보다 더 간결하고 직관적인 방법이다. 이제 배열로 변환된 `arr`에는 모든 배열 메서드를 자유롭게 사용할 수 있다.
+- ES6에서 도입된 `Array.from` 메서드를 사용하여 유사 배열 객체를 배열로 변환하는 방법이다. `Array.from(obj)`는 유사 배열 객체 `obj`를 진짜 배열로 변환한다. 이는 이전 예제에서 본 `Array.prototype.slice.call(obj)` 패턴보다 더 간결하고 직관적인 방법이다. 이제 배열로 변환된 `arr`에는 모든 배열 메서드를 자유롭게 사용할 수 있다.
 
 ### 예제 3-21
 ```javascript
+function Person(name, gender) {
+    this.name = name;
+    this.gender = gender;
+}
 
+function Student(name, gender, school) {
+    Person.call(this, name, gender);
+    this.school = school;
+}
+
+function Employee(name, gender, company) {
+    Person.apply(this, [name, gender]);
+    this.company = company;
+}
+
+var by = new Student('보영', 'female', '단국대');
+  
+var jn = new Employee('재난', 'male', '구골');
 ```
+- 코드는 생성자 함수 간에 `call`과 `apply`를 활용한 상속 패턴을 나타낸다. `Student`와 `Employee` 생성자 함수는 각각 `Person` 생성자 함수를 호출하여 공통 속성(`name`, `gender`)을 초기화한다. `Student`에서는 `Person.call(this, name, gender)`를, `Employee`에서는 `Person.apply(this, [name, gender])`를 사용한다. 이를 통해 생성자 함수 간의 코드 재사용이 가능해진다.
 
 ### 예제 3-22
 ```javascript
