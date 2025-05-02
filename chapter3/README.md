@@ -301,8 +301,16 @@ console.log(newStr);
 
 ### 예제 3-20
 ```javascript
-
+var obj = {
+    0: 'a',
+    1: 'b',
+    2: 'c',
+    length: 3,
+};
+var arr = Array.from(obj);
+console.log(arr);
 ```
+- ES6에서 도입된 `Array.from` 메서드를 사용하여 유사 배열 객체를 배열로 변환하는 방법을 보여준다. `Array.from(obj)`는 유사 배열 객체 `obj`를 진짜 배열로 변환한다. 이는 이전 예제에서 본 `Array.prototype.slice.call(obj)` 패턴보다 더 간결하고 직관적인 방법이다. 이제 배열로 변환된 `arr`에는 모든 배열 메서드를 자유롭게 사용할 수 있다.
 
 ### 예제 3-21
 ```javascript
