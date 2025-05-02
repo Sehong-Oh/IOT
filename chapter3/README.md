@@ -64,8 +64,18 @@ console.log(d, window.d, this.d);
 
 ### 예제 3-6
 ```javascript
+var func = function(x) {
+    console.log(this, x);
+};
+func(1);
 
+var obj = {
+    method: func,
+};
+obj.method(2);
 ```
+- 함수 호출 방식에 따라 `this`가 어떻게 달라지는지 보여준다. 일반 함수로 호출된 `func(1)`에서 `this`는 전역 객체(Window)를 가리킨다. 반면 객체의 메서드로 호출된 `obj.method(2)`에서는 `this`가 메서드를 호출한 객체(`obj`)를 가리킨다. 이는 JavaScript에서 함수 호출 패턴에 따라 `this`가 동적으로 결정됨을 보여준다.
+
 
 ### 예제 3-7
 ```javascript
