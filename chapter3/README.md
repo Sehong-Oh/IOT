@@ -456,11 +456,28 @@ var obj = {
 };
 obj.outer();
 ```
+화살표 함수를 사용하여 내부 함수에서 외부 함수의 `this`를 유지하는 방법을 나타낸다. `obj.outer()` 호출 시 `outer` 내부에서 `this`는 `obj`를 가리킨다. 화살표 함수로 정의된 `innerFunc`는 자신만의 `this`를 생성하지 않고 외부 스코프(여기서는 `outer` 함수)의 `this`를 그대로 사용한다. 따라서 `innerFunc` 내부에서도 `this`는 `obj`를 가리킨다. 화살표 함수는 `bind`를 사용하는 것보다 더 간결하게 `this` 바인딩을 유지할 수 있다.
 
 ### 예제 3-30
 ```javascript
-
+var report = {
+    sum: 0,
+    count: 0,
+    add: function() {
+      var args = Array.prototype.slice.call(arguments);
+      args.forEach(function(entry) {
+        this.sum += entry;
+        ++this.count;
+      }, this);
+    },
+    average: function() {
+      return this.sum / this.count;
+    }
+};
+report.add(60, 85, 95);
+console.log(report.sum, report.count, report.average());
 ```
+- `report.add` 메서드에서 `args.forEach` 호출 시 두 번째 인자로 `this`를 전달하여, 콜백 함수 내부에서 `this`가 `report` 객체를 가리키게 한다. 이를 통해 콜백 함수 내에서 `this.sum`과 `this.count`에 안전하게 접근할 수 있다. 이는 배열 메서드 사용 시 콜백의 컨텍스트를 유지하는 중요한 패턴이다.
 
 ### 예제 3-31
 ```javascript
