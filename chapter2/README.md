@@ -138,8 +138,18 @@ d(); //에러남
 
 ### 예제 2-9
 ```javascript
+console.log(sum(1, 2));
+console.log(multiply(3, 4));
 
+function sum(a, b) {
+  return a + b;
+}
+
+var multiply = function(a, b) {
+  return a * b;
+};
 ```
+- 함수 선언문(`function sum()`)은 전체가 호이스팅되어 선언 전에도 호출 가능하므로 첫 번째 `console.log`에서 정상 작동한다. 반면 함수 표현식(`var multiply = function()`)은 변수 선언만 호이스팅되고 함수 할당은 원래 위치에서 이루어지므로, 정의되기 전에 호출하면 TypeError가 발생한다.
 
 ### 예제 2-10
 ```javascript
