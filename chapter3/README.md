@@ -91,8 +91,25 @@ obj['method'](2);
 
 ### 예제 3-8
 ```javascript
+var obj = {
+    methodA: function() {
+        console.log(this);
+    },
+    inner: {
+        methodB: function() {
+            console.log(this);
+      },
+    },
+};
+obj.methodA();
+obj['methodA']();
 
+obj.inner.methodB();
+obj.inner['methodB']();
+obj['inner'].methodB();
+obj['inner']['methodB']();
 ```
+- `obj.methodA()`나 `obj['methodA']()`를 호출할 때 `this`는 `obj`를 가리킨다. 반면 `obj.inner.methodB()`, `obj.inner['methodB']()`, `obj['inner'].methodB()`, `obj['inner']['methodB']()`를 호출할 때는 `this`가 `obj.inner`를 가리킨다. 이는 메서드를 호출할 때 `this`가 항상 해당 메서드를 직접 호출한 객체(점이나 괄호 표기법 바로 앞의 객체)에 바인딩됨을 보여준다.
 
 ### 예제 3-9
 ```javascript
