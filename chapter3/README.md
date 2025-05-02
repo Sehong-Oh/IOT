@@ -278,8 +278,26 @@ nodeArr.forEach(function(node) {
 
 ### 예제 3-19
 ```javascript
+var str = 'abc def';
 
+Array.prototype.push.call(str, ', pushed string');
+
+Array.prototype.concat.call(str, 'string');
+
+Array.prototype.every.call(str, function(char) {return char !== ' ';});
+
+Array.prototype.some.call(str, function(char) {return char === ' ';});
+
+var newArr = Array.prototype.map.call(str, function(char) {return char + '!';});
+console.log(newArr);
+
+var newStr = Array.prototype.reduce.apply(str, [
+  function(string, char, i) {return string + char + i;},
+  ''
+]);
+console.log(newStr);
 ```
+- 문자열에 다양한 배열 메서드를 적용하는 예시를 보여준다. 문자열은 읽기 전용 유사 배열 객체로, 일부 배열 메서드는 적용 가능하지만 변형을 시도하면 에러가 발생한다. `push`처럼 원본을 변경하는 메서드는 에러를 발생시키지만, `concat`, `every`, `some`, `map`, `reduce` 등 원본을 변경하지 않는 메서드는 문자열에도 적용 가능하다. 이를 통해 문자열의 각 문자를 다양한 방식으로 처리할 수 있다.
 
 ### 예제 3-20
 ```javascript
