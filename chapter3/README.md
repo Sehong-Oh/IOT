@@ -445,7 +445,16 @@ obj.logThisLater2();
 
 ### 예제 3-29
 ```javascript
-
+var obj = {
+    outer: function() {
+        console.log(this);
+        var innerFunc = () => {
+            console.log(this);
+        };
+        innerFunc();
+    }
+};
+obj.outer();
 ```
 
 ### 예제 3-30
