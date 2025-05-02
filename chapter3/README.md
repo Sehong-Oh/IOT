@@ -481,5 +481,17 @@ console.log(report.sum, report.count, report.average());
 
 ### 예제 3-31
 ```javascript
-
+//API
+Array.prototype.forEach(callback[, thisArg])
+Array.prototype.map(callback[, thisArg])
+Array.prototype.filter(callback[, thisArg])
+Array.prototype.some(callback[, thisArg])
+Array.prototype.every(callback[, thisArg])
+Array.prototype.find(callback[, thisArg])
+Array.prototype.findIndex(callback[, thisArg])
+Array.prototype.flatMap(callback[, thisArg])
+Array.prototype.from(arrayLike[, callback[, thisArg]])
+Set.prototype.forEach(callback[, thisArg])
+Map.prototype.forEach(callback[, thisArg])
 ```
+'이 메서드들은 콜백 함수 내부에서 사용할 `this` 값을 두 번째 매개변수로 받을 수 있다. 이는 콜백 함수에서 특정 객체의 컨텍스트를 유지해야 할 때 유용하다. ES6 이후 많은 배열 메서드와 Set, Map 등의 컬렉션 메서드에서 이 패턴을 지원한다. 이를 통해 콜백 함수의 `this` 바인딩을 간편하게 제어할 수 있다.
