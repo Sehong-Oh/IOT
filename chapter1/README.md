@@ -320,10 +320,9 @@ obj.b.d[1] = 3;
 console.log(obj); 
 console.log(obj2);
 ```
-JSON을 이용한 간편한 깊은 복사:
-
-- copyObjectViaJSON 함수는 JSON.stringify()로 객체를 JSON 문자열로 변환한 후, JSON.parse()로 다시 객체로 변환한다.  
-이 방식은 복잡한 재귀 함수 없이 깊은 복사를 구현할 수 있는 간단한 방법이다.
+- JSON을 이용한 간편한 깊은 복사:  
+  - copyObjectViaJSON 함수는 JSON.stringify()로 객체를 JSON 문자열로 변환한 후, JSON.parse()로 다시 객체로 변환한다.  
+  -이 방식은 복잡한 재귀 함수 없이 깊은 복사를 구현할 수 있는 간단한 방법이다.
 
 ### 예제 1-19
 ```
@@ -383,18 +382,18 @@ arr2.filter(function(v) {return !v;});
 arr1.reduce(function(p, c, i) {return p + c + i;}, '');
 arr2.reduce(function(p, c, i) {return p + c + i;}, '');
 ```
-- forEach
+- forEach  
   -arr1.forEach는 두 요소 모두 순회한다: `undefined 0, 1 1` 출력
   -arr2.forEach는 존재하는 요소만 순회한다: `1 1`만 출력 (빈 슬롯 건너뜀)
--map
+-map  
   -arr1.map은 두 요소 모두에 함수를 적용한다: `[NaN, 2]` 반환 (undefined + 0 = NaN)
   -arr2.map은 존재하는 요소에만 함수를 적용한다: `[empty, 2]` 반환
-- filter
+- filter  
   -arr1.filter는 두 요소 모두 검사한다: `[undefined]` 반환 (!undefined는 true)
   -arr2.filter는 존재하는 요소만 검사한다: `[]` 반환 (빈 슬롯은 검사하지 않음)
-- reduce
-  -arr1.reduce는 두 요소 모두에 함수를 적용한다: 'undefined01' 반환
-  -arr2.reduce는 존재하는 요소에만 함수를 적용한다: '1' 반환
+- reduce  
+  -arr1.reduce는 두 요소 모두에 함수를 적용한다: `'undefined01'` 반환
+  -arr2.reduce는 존재하는 요소에만 함수를 적용한다: `'1'` 반환
 
 ### 예제 1-22
 ```
