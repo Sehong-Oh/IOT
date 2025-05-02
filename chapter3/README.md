@@ -149,7 +149,7 @@ var obj1 = {
 };
 obj1.outer();
 ```
--중첩 함수에서 `this`를 우회하는 방법을 보여준다. `obj.outer()` 호출 시 `outer` 내부에서 `this`는 `obj`를 가리킨다. 그러나 내부 함수 `innerFunc1()`에서 `this`는 전역 객체를 가리킨다. 이 문제를 해결하기 위해 `outer` 함수에서 `this`를 변수 `self`에 저장한 후, `innerFunc2` 내부에서 `self`를 참조하면 `obj`에 접근할 수 있다. 이 패턴은 내부 함수에서 외부 함수의 `this`를 사용해야 할 때 자주 활용된다.
+- 중첩 함수에서 `this`를 우회하는 방법을 보여준다. `obj.outer()` 호출 시 `outer` 내부에서 `this`는 `obj`를 가리킨다. 그러나 내부 함수 `innerFunc1()`에서 `this`는 전역 객체를 가리킨다. 이 문제를 해결하기 위해 `outer` 함수에서 `this`를 변수 `self`에 저장한 후, `innerFunc2` 내부에서 `self`를 참조하면 `obj`에 접근할 수 있다. 이 패턴은 내부 함수에서 외부 함수의 `this`를 사용해야 할 때 자주 활용된다.
 
 ### 예제 3-11
 ```javascript
@@ -225,8 +225,21 @@ obj.method.call({ a: 4 }, 5, 6);
 
 ### 예제 3-16
 ```javascript
+var func = function(a, b, c) {
+    console.log(this, a, b, c);
+};
+func.apply({ x: 1 }, [4, 5, 6]);
 
+var obj = {
+    a: 1,
+    method: function(x, y) {
+        console.log(this.a, x, y);
+    }
+};
+obj.method.apply({ a: 4 }, [5, 6]);  
 ```
+- `apply`는 `call`과 유사하지만, 두 번째 인자로 배열(또는 유사 배열 객체)을 받아 함수의 매개변수로 전달한다. `func.apply({ x: 1 }, [4, 5, 6])`에서 `this`는 `{ x: 1 }`이 되고, 배열 [4, 5, 6]의 각 요소가 함수의 매개변수로 전달된다. 마찬가지로 `obj.method.apply({ a: 4 }, [5, 6])`에서도 `this`는 `{ a: 4 }`가 되고, [5, 6]의 요소들이 매개변수로 전달된다.
+
 
 ### 예제 3-17
 ```javascript
