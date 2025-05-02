@@ -186,8 +186,17 @@ document.body.querySelector('#a')
 
 ### 예제 3-13
 ```javascript
-
+var Cat = function(name, age) {
+    this.bark = '야옹';
+    this.name = name;
+    this.age = age;
+};
+var choco = new Cat('초코', 7);
+var nabi = new Cat('나비', 5);
+console.log(choco, nabi);
 ```
+- `Cat` 함수를 `new` 키워드와 함께 호출하면 새로운 객체가 생성되고, 함수 내부의 `this`는 이 새 객체를 가리킨다. 함수 내 `this.bark`, `this.name`, `this.age`에 값을 할당하면 새 객체의 프로퍼티로 설정된다.  
+- 결과적으로 `choco`와 `nabi`는 각각 `Cat` 생성자 함수로 생성된 서로 다른 객체가 되며, 각자 자신의 프로퍼티 값을 갖게 된다.
 
 ### 예제 3-14
 ```javascript
