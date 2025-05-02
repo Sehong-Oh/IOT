@@ -12,7 +12,9 @@ console.log(this === window);
 
 ### 예제 3-2
 ```javascript
-
+console.log(this);
+console.log(global);
+console.log(this === global);
 ```
 - Node.js 환경에서 전역 객체에 접근하는 방법이다. Node.js에서 전역 객체는 `global`이라는 이름을 가지며, 최상위 스코프의 `this`는 `global` 객체를 참조한다. `this === global`이 `true`를 반환하는 것으로 이를 확인할 수 있다. Node.js의 전역 객체는 `process` 등의 Node.js 관련 정보를 포함하고 있다.
 
