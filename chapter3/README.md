@@ -19,8 +19,12 @@ console.log(this === window);
 
 ### 예제 3-3
 ```javascript
-
+var a = 1;
+console.log(a);
+console.log(window.a);
+console.log(this.a);
 ```
+- `var`로 선언된 전역 변수 `a`는 자동으로 전역 객체(window)의 프로퍼티가 된다. 따라서 `a`, `window.a`, `this.a` 모두 동일한 값(1)에 접근한다. 이는 전역 스코프에서 선언된 변수가 전역 객체의 프로퍼티로 자동 등록되는 특성을 보여준다.
 
 ### 예제 3-4
 ```javascript
