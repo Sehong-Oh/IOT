@@ -174,6 +174,14 @@ return { name: newName, gender: user.gender };는 원본 객체의 속성을 복
 
 ### 예제 1-12
 ```
+// 예제 1-12 얕은복사
+var copyObject = function (target) {
+    var result = {};
+    for (var prop in target) {
+        result[prop] = target[prop];
+    }
+    return result
+}
 ```
 - 얕은 복사의 특징  
   - 얕은 복사는 객체의 1차 속성들만 복사한다. 속성 값이 기본형 데이터(숫자, 문자열 등)일 경우 완전한 복사가 이루어진다.  
