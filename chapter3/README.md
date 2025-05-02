@@ -4,8 +4,11 @@
 ## Chapter3
 ### 예제 3-1
 ```javascript
-
+console.log(this);
+console.log(window);
+console.log(this === window);
 ```
+- 브라우저 환경에서 전역 객체에 접근하는 방법을 보여준다. 브라우저에서 `this`는 전역 객체인 `window`를 가리키므로, `this`와 `window`는 동일한 객체를 참조한다. `this === window`가 `true`를 반환하는 것으로 이를 확인할 수 있다. 브라우저의 전역 객체는 `alert()`, `atob()` 등의 여러 내장 메서드를 포함하고 있다.
 
 ### 예제 3-2
 ```javascript
