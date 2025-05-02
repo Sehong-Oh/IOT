@@ -168,8 +168,21 @@ obj.outer();
 
 ### 예제 3-12
 ```javascript
+setTimeout(function() {
+    console.log(this);
+}, 300);
 
+[1, 2, 3, 4, 5].forEach(function(x) {
+    console.log(this, x);
+});
+
+document.body.innerHTML += '<button id="a">클릭</button>';
+document.body.querySelector('#a')
+    .addEventListener('click', function(e) {
+    console.log(this, e);
+});
 ```
+- `setTimeout` 함수의 콜백에서 `this`는 전역 객체를 가리킨다. `forEach` 메서드의 콜백 함수에서도 `this`는 전역 객체를 가리킨다. 그러나 이벤트 리스너의 콜백 함수에서는 `this`가 이벤트를 발생시킨 요소(여기서는 클릭된 버튼)를 가리킨다. 이처럼 콜백 함수의 `this`는 호출 주체에 따라 달라지며, 일부 메서드는 `this`를 특정 값으로 설정한다.
 
 ### 예제 3-13
 ```javascript
