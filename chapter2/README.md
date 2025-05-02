@@ -211,8 +211,20 @@ console.log(c);
 
 ### 예제 2-13
 ```javascript
+var a = 1;
+var outer = function() {
+  var inner = function() {
+    console.log(a);
+    var a = 3;
+  };
+  inner();
+  console.log(a);
+};
+outer();
 
+console.log(a);
 ```
+- 이 코드는 중첩 함수에서의 변수 스코프와 호이스팅을 보여준다. 전역 변수 `a`와 함수 `outer` 내의 함수 `inner`에서 선언된 지역 변수 `a`가 존재한다. `inner` 함수 내에서 `console.log(a)`는 호이스팅된 지역 변수 `a`를 참조하지만, 아직 초기화 전이므로 undefined가 출력된다. `outer` 함수와 전역 스코프에서의 `console.log(a)`는 모두 전역 변수 `a`(값 1)를 참조한다.
 
 ### 예제 2-14
 ```javascript
