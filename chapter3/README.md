@@ -28,8 +28,17 @@ console.log(this.a);
 
 ### 예제 3-4
 ```javascript
+var a = 1;
+window.b = 2;
+console.log(a, window.a, this.a);
+console.log(b, window.b, this.b);
 
+window.a = 3;
+b = 4;
+console.log(a, window.a, this.a);
+console.log(b, window.b, this.b);
 ```
+-  `var a = 1`로 선언한 변수와 `window.b = 2`로 직접 할당한 프로퍼티는 모두 전역 객체의 프로퍼티가 된다. 따라서 `a`와 `window.a`, `this.a`는 모두 같은 값을 참조하며, `b`와 `window.b`, `this.b`도 마찬가지다. 또한 `window.a = 3`처럼 전역 객체를 통해 값을 변경하면 변수 `a`의 값도 변경되고, `b = 4`처럼 변수만 사용해도 전역 객체의 프로퍼티 값이 변경된다.
 
 ### 예제 3-5
 ```javascript
