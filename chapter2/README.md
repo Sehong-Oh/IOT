@@ -153,8 +153,19 @@ var multiply = function(a, b) {
 
 ### 예제 2-10
 ```javascript
-
+var sum = function sum(a, b) {
+    return a + b;
+  };
+  
+  var multiply;
+  console.log(sum(1, 2));
+  console.log(multiply(3, 4));
+  
+  multiply = function(a, b) {
+    return a * b;
+  };
 ```
+- 이 코드는 2-9의 코드가 호이스팅된 후의 상태를 표현한 것이다. `var sum`은 함수 표현식이므로 선언과 함께 초기화되고, `var multiply`는 선언만 호이스팅되어 undefined 상태가 된다.
 
 ### 예제 2-11
 ```javascript
