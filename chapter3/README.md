@@ -427,8 +427,21 @@ obj.outer();
 
 ### 예제 3-28
 ```javascript
-
+var obj = {
+    logThis: function() {
+      console.log(this);
+    },
+    logThisLater1: function() {
+      setTimeout(this.logThis, 500);
+    },
+    logThisLater2: function() {
+      setTimeout(this.logThis.bind(this), 1000);
+    }
+};
+obj.logThisLater1();
+obj.logThisLater2();
 ```
+- 비동기 콜백 함수에서 `this` 바인딩을 유지하는 방법을 나타낸다. `obj.logThisLater1`에서는 `setTimeout`의 콜백으로 `this.logThis`를 그대로 전달하여, 콜백 실행 시 `this`가 전역 객체를 가리키게 된다. 반면 `obj.logThisLater2`에서는 `setTimeout`의 콜백으로 `this.logThis.bind(this)`를 전달하여, 콜백의 `this`를 `obj`로 고정한다. 이는 비동기 호출에서 객체 컨텍스트를 유지하는 중요한 패턴이다.
 
 ### 예제 3-29
 ```javascript
