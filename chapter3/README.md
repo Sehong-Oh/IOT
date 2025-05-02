@@ -397,11 +397,33 @@ var bindFunc = func.bind({ x: 1 }, 4, 5);
 console.log(func.name);
 console.log(bindFunc.name);  
 ```
+'`bind` 메서드로 생성된 함수의 `name` 프로퍼티 변화를 알 수 있다. 원본 함수 `func`의 `name`은 "func"이지만, `bind`로 생성된 함수 `bindFunc`의 `name`은 "bound func"가 된다. 이는 `bind`된 함수가 원본 함수와는 다른 새로운 함수 객체임을 나타내며, 디버깅 시 바인딩된 함수를 식별하는 데 도움이 된다.
 
 ### 예제 3-27
 ```javascript
+var obj = {
+    outer: function() {
+      console.log(this);
+      var innerFunc = function() {
+        console.log(this);
+      };
+      innerFunc.call(this);
+    }
+};
+obj.outer();
 
+var obj = {
+    outer: function() {
+    console.log(this);
+    var innerFunc = function() {
+        console.log(this);
+    }.bind(this);
+    innerFunc();
+    }
+};
+obj.outer();  
 ```
+'내부 함수에서 외부 함수의 `this`를 사용하기 위한 두 가지 방법을 보여준다. 첫 번째 예제에서는 `innerFunc.call(this)`를 사용하여 내부 함수 호출 시 `this`를 외부 함수의 `this`로 명시적으로 바인딩한다. 두 번째 예제에서는 `function() { ... }.bind(this)`를 사용하여 내부 함수 정의 시점에 `this`를 외부 함수의 `this`로 영구적으로 바인딩한다. 두 방법 모두 내부 함수에서 외부 함수의 컨텍스트에 접근하는 방법을 제공한다.
 
 ### 예제 3-28
 ```javascript
