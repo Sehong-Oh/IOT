@@ -337,8 +337,20 @@ var jn = new Employee('재난', 'male', '구골');
 
 ### 예제 3-22
 ```javascript
+var numbers = [10, 20, 3, 16, 45];
+var max = (min = numbers[0]);
+numbers.forEach(function(number) {
+  if (number > max) {
+    max = number;
+  }
+  if (number < min) {
+    min = number;
+  }
+});
 
+console.log(max, min);
 ```
+- 배열의 첫 번째 요소로 `max`와 `min`을 초기화한 후, `forEach` 메서드로 배열의 각 요소를 순회하며 최대값과 최소값을 갱신한다. 이는 반복문을 통한 배열 처리의 기본적인 패턴이다.
 
 ### 예제 3-23
 ```javascript
