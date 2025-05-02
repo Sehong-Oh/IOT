@@ -297,7 +297,33 @@ console.log(obj2)
 
 ### 예제 1-18
 ```
+var copyObjectViaJSON = function(target) {
+    return JSON.parse(JSON.stringify(target));
+  };
+
+var obj = {
+a: 1,
+b: {
+    c: null,
+    d: [1, 2],
+    func1: function() {console.log(3);}
+    },
+    func2: function() {console.log(4);}
+};
+
+var obj2 = copyObjectViaJSON(obj);
+
+obj2.a = 3;
+obj2.b.c = 4;
+obj.b.d[1] = 3;
+
+console.log(obj); 
+console.log(obj2);
 ```
+JSON을 이용한 간편한 깊은 복사:
+
+- copyObjectViaJSON 함수는 JSON.stringify()로 객체를 JSON 문자열로 변환한 후, JSON.parse()로 다시 객체로 변환한다.  
+이 방식은 복잡한 재귀 함수 없이 깊은 복사를 구현할 수 있는 간단한 방법이다.
 
 ### 예제 1-19
 ```
