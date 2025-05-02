@@ -79,8 +79,15 @@ obj.method(2);
 
 ### 예제 3-7
 ```javascript
-
+var obj = {
+    method: function(x) {
+      console.log(this, x);
+    },
+};
+obj.method(1);
+obj['method'](2);
 ```
+- 객체의 메서드를 다양한 방식으로 호출할 때 `this`의 값을 보여준다. `obj.method(1)`와 `obj['method'](2)` 두 방식 모두 `this`는 호출한 객체 `obj`를 가리킨다. 이는 메서드 호출 시 점 표기법(.)이나 괄호 표기법([])이 `this` 바인딩에 영향을 주지 않음을 보여준다. 둘 다 같은 객체의 메서드로 호출된 것으로 인식된다.
 
 ### 예제 3-8
 ```javascript
