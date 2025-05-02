@@ -211,8 +211,17 @@ func.call({ x: 1 }, 4,5,6);
 
 ### 예제 3-15
 ```javascript
+var obj = {
+    a: 1,
+    method: function(x, y) {
+        console.log(this.a, x, y);
+    }
+};
 
+obj.method(2, 3);
+obj.method.call({ a: 4 }, 5, 6);
 ```
+- 이 코드는 객체 메서드에서 `call`을 사용하는 예를 보여준다. `obj.method(2, 3)` 호출 시 `this`는 `obj`를 가리켜 `this.a`는 1이 된다. 그러나 `obj.method.call({ a: 4 }, 5, 6)` 호출 시에는 `this`가 `{ a: 4 }`로 교체되어 `this.a`는 4가 되고, 인자로 5와 6이 전달된다. 이는 `call`을 통해 메서드의 `this` 바인딩을 원하는 객체로 변경할 수 있음을 보여준다.
 
 ### 예제 3-16
 ```javascript
