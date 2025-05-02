@@ -90,8 +90,20 @@ function a() {
 
 ### 예제 2-6
 ```javascript
+function a() {
+    var b;
+    function b() {}
 
+    console.log(b);
+    b = 'bbb';
+    console.log(b);
+    console.log(b);
+  }
+
+  a();
 ```
+- 2-5의 동작을 호이스팅된 상태로 명시적으로 재구성한 것이다. 변수 선언과 함수 선언을 코드 상단에 배치하여, 실제 JavaScript 엔진이 코드를 해석하는 방식을 표현한다.
+- 함수 선언이 변수 선언보다 우선시되어 첫 번째 `console.log`에서는 함수 객체가 출력된다. 이후 `b`에 'bbb' 값이 할당되면 두 번째와 세 번째 `console.log`에서는 모두 'bbb'가 출력된다. 이는 호이스팅의 동작과 실행 순서를 명확히 보여준다.
 
 ### 예제 2-7
 ```javascript
