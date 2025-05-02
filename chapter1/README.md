@@ -3,7 +3,7 @@
 
 ## Chapter1
 ### 예제 1-1
-```
+```javascript
 var a;
 ```
 - 변경가능한 데이터가 담길 수 있는 공간을 생성 (a : 식별자)
@@ -41,7 +41,7 @@ b = 7;
 이는 b와 c가 같은 메모리 위치를 참조하지 않고, 각각 독립적인 값을 가지고 있기 때문이다.
 
 ### 예제 1-4
-```
+```javascript
 var obj1 = {
     a: 1,
     b: 'bbb'
@@ -52,7 +52,7 @@ var obj1 = {
 이전 예제에서 본 기본형(primitive) 데이터타입과 달리, 참조형 데이터는 변수 간 복사 시 값이 아닌 참조(메모리 주소)가 복사됩니다.
 
 ### 예제 1-5
-```
+```javascript
 var obj1 = {
     a: 1,
     b: 'bbb'
@@ -66,7 +66,7 @@ obj1.a = 2;
 이는 앞서 본 기본형 데이터타입(primitive types)과 다른 점이다.
 
 ### 예제 1-6
-```
+```javascript
 var obj = {
     x: 3,
     arr: [3, 4, 5]
@@ -75,7 +75,7 @@ var obj = {
 - 다중 참조 관계: obj.arr은 배열 [3, 4, 5]의 참조를 저장한다. 따라서 obj.arr을 통해 배열의 요소에 접근하거나 변경할 수 있다.
 
 ### 예제 1-7
-```
+```javascript
 var a = 10;
 var b = a;
 
@@ -91,7 +91,7 @@ var obj2 = obj1;
 
 
 ### 예제 1-8
-```
+```javascript
 var a = 10;
 var b = a;
 var obj1 = {c:10, d: 'ddd'};
@@ -105,7 +105,7 @@ obj2.c = 20;
 - 기본형은 값 자체가 복사되고, 참조형은 메모리 주소(참조)가 복사된다. 이를 이해하면 코드의 예상치 못한 동작을 방지할 수 있다.
 
 ### 예제 1-9
-```
+```javascript
 var a = 10;
 var b = a;
 var obj1 = {c:10, d: 'ddd'};
@@ -119,7 +119,7 @@ obj2 = {c:20, d: 'ddd'};
 이렇게 하면 obj2는 obj1과 다른 객체를 가리키게 되어 서로 독립적인 상태가 된다.
 
 ### 예제 1-10
-```
+```javascript
 var user = {
     name: 'Jaenam',
     gender: 'male'
@@ -145,7 +145,7 @@ if (user !== user2) {
 따라서 newUser.name = newName;은 원본 객체인 user의 name 속성도 함께 변경한다.
 
 ### 예제 1-11
-```
+```javascript
 var user = {
     name: 'Jaenam',
     gender: 'male'
@@ -173,7 +173,7 @@ return { name: newName, gender: user.gender };는 원본 객체의 속성을 복
 
 
 ### 예제 1-12
-```
+```javascript
 // 예제 1-12 얕은복사
 var copyObject = function (target) {
     var result = {};
@@ -191,7 +191,7 @@ var copyObject = function (target) {
   - 중첩된 객체(객체 안의 객체)는 여전히 원본과 복사본이 동일한 참조를 공유한다. 따라서 복사본의 중첩 객체를 변경하면 원본의 중첩 객체도 함께 변경된다.
 
 ### 예제 1-13
-```
+```javascript
 var user = {
     name: 'Jaenam',
     gender: 'male'
@@ -213,7 +213,7 @@ if (user !== user2) {
 - 복사본 수정 : user2.name = 'Jung';으로 복사된 객체의 name 속성을 변경한다. 원본 객체(user)는 영향을 받지 않고 그대로 유지된다.
 
 ### 예제 1-14
-```
+```javascript
 var user = {
     name: 'Jaenam',
     urls: {
@@ -238,7 +238,7 @@ var user = {
 이러한 문제를 해결하기 위해서는 깊은 복사(Deep Copy)가 필요하다.
 
 ### 예제 1-15
-```
+```javascript
 var user2 = copyObject(user);
 user2.urls = copyObject(user.urls);
 
@@ -254,7 +254,7 @@ console.log(user.urls.blog == user2.urls.blog);
 - 그러나 이 방식은 객체의 모든 중첩 레벨을 일일이 복사해야 하므로 객체 구조가 복잡할수록 코드가 번거로워진다.
 
 ### 예제 1-16
-```
+```javascript
 var copyObjectDeep = function(target) {
     var result = {};
     if (typeof target === 'object' && target !== null) {
@@ -273,7 +273,7 @@ var copyObjectDeep = function(target) {
 이를 통해 얕은 복사의 한계를 극복하고 객체의 완전한 복제본을 생성한다.
 
 ### 예제 1-17
-```
+```javascript
 // 예제 1-17
 var obj = {
     a: 1,
@@ -296,7 +296,7 @@ console.log(obj2)
 - 깊은 복사는 원본 데이터의 무결성을 유지하면서 데이터를 안전하게 조작할 수 있게 해준다.
 
 ### 예제 1-18
-```
+```javascript
 var copyObjectViaJSON = function(target) {
     return JSON.parse(JSON.stringify(target));
   };
@@ -325,7 +325,7 @@ console.log(obj2);
   -이 방식은 복잡한 재귀 함수 없이 깊은 복사를 구현할 수 있는 간단한 방법이다.
 
 ### 예제 1-19
-```
+```javascript
 var a;
 console.log(a); 
 
@@ -350,7 +350,7 @@ console.log(c);
 
 
 ### 예제 1-20
-```
+```javascript
 var arr1 = [];
 arr1.length = 3;
 console.log(arr1);
@@ -365,7 +365,7 @@ console.log(arr3);
 - 이 차이는 배열 메서드 사용 시 중요해질 수 있다. 예를 들어, `forEach`, `map` 등의 메서드는 빈 슬롯을 건너뛰지만 undefined 값은 처리한다.
 
 ### 예제 1-21
-```
+```javascript
 var arr1 = [undefined, 1];
 var arr2 = [];
 arr2[1] = 1;
@@ -396,7 +396,7 @@ arr2.reduce(function(p, c, i) {return p + c + i;}, '');
   -arr2.reduce는 존재하는 요소에만 함수를 적용한다: `'1'` 반환
 
 ### 예제 1-22
-```
+```javascript
 var n = null;
 console.log(typeof n);
 console.log(n == undefined);
