@@ -146,7 +146,31 @@ if (user !== user2) {
 
 ### 예제 1-11
 ```
+var user = {
+    name: 'Jaenam',
+    gender: 'male'
+}
+
+var changeName = function (user, newName) {
+    return {
+        name: newName,
+        gender: user.gender
+    };
+};
+
+var user2 = changeName(user, 'Jung');
+
+if (user !== user2) {
+    console.log('유저 정보가 변경되었습니다.');
+}
+// console.log(user.name, user2.name);
+// console.log(user == user2);
 ```
+- 이 코드는 앞서 보았던 객체의 가변성 문제를 해결하는 방법을 보여준다:
+- changeName 함수가 기존 객체를 변경하는 대신 새로운 객체를 생성하여 반환한다.  
+return { name: newName, gender: user.gender };는 원본 객체의 속성을 복사하면서 필요한 속성(name)만 새 값으로 설정한다.  
+이렇게 하면 원본 객체(user)는 변경되지 않고 유지된다.
+
 
 ### 예제 1-12
 ```
