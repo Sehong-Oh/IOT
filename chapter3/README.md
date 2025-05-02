@@ -243,8 +243,19 @@ obj.method.apply({ a: 4 }, [5, 6]);
 
 ### 예제 3-17
 ```javascript
+var obj = {
+    0: 'a',
+    1: 'b',
+    2: 'c',
+    length: 3,
+};
+Array.prototype.push.call(obj, 'd');
+console.log(obj);
 
+var arr = Array.prototype.slice.call(obj);
+console.log(arr);
 ```
+- 이 코드는 유사 배열 객체에 배열 메서드를 적용하는 예를 보여준다. `obj`는 배열처럼 인덱스와 `length` 프로퍼티를 가진 유사 배열 객체다. `Array.prototype.push.call(obj, 'd')`를 통해 배열의 `push` 메서드를 `obj`에 적용하여 새 요소를 추가한다. 또한 `Array.prototype.slice.call(obj)`로 `obj`를 실제 배열로 변환한다. 이는 배열이 아닌 객체에 배열 메서드를 빌려 사용하는 패턴을 보여준다.
 
 ### 예제 3-18
 ```javascript
