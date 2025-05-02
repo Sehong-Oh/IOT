@@ -153,8 +153,18 @@ obj1.outer();
 
 ### 예제 3-11
 ```javascript
-
+var obj = {
+    outer: function() {
+      console.log(this);
+      var innerFunc = () => {
+        console.log(this);
+      };
+      innerFunc();
+    },
+};
+obj.outer();
 ```
+-  화살표 함수로 정의된 `innerFunc`에서 `this`는 자신을 감싸는 `outer` 함수의 `this`를 그대로 상속받아 `obj`를 가리킨다. 화살표 함수는 자신만의 `this`를 생성하지 않고 외부 스코프의 `this`를 그대로 사용하는 특성을 가진다.
 
 ### 예제 3-12
 ```javascript
