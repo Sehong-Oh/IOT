@@ -354,8 +354,12 @@ console.log(max, min);
 
 ### 예제 3-23
 ```javascript
-
+var numbers = [10, 20, 3, 16, 45];
+var max = Math.max.apply(null, numbers);
+var min = Math.min.apply(null, numbers);
+console.log(max, min);
 ```
+-`Math.max`와 `Math.min` 메서드를 `apply`와 함께 사용하여 배열의 최대값과 최소값을 효율적으로 찾는 방법이다. 이 방식은 3-22의 반복문보다 더 간결하고 효율적이다.
 
 ### 예제 3-24
 ```javascript
