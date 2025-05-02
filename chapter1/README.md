@@ -255,7 +255,22 @@ console.log(user.urls.blog == user2.urls.blog);
 
 ### 예제 1-16
 ```
+var copyObjectDeep = function(target) {
+    var result = {};
+    if (typeof target === 'object' && target !== null) {
+        for (var prop in target) {
+            result[prop] = copyObjectDeep(target[prop]);
+        }
+    }
+    else {
+        result = target;
+    }
+    return result;
+};
 ```
+- 객체의 깊은 복사(Deep Copy)를 구현하는 재귀 함수를 보여준다.  
+- copyObjectDeep 함수는 자기 자신을 재귀적으로 호출하여 모든 중첩 수준의 객체를 복사한다.  
+이를 통해 얕은 복사의 한계를 극복하고 객체의 완전한 복제본을 생성한다.
 
 ### 예제 1-17
 ```
