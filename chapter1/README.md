@@ -367,7 +367,34 @@ console.log(arr3);
 
 ### 예제 1-21
 ```
+var arr1 = [undefined, 1];
+var arr2 = [];
+arr2[1] = 1;
+
+arr1.forEach(function(v, i) {console.log(v, i);}); 
+arr2.forEach(function(v, i) {console.log(v, i);});
+
+arr1.map(function(v, i) {return v + i;}); 
+arr2.map(function(v, i) {return v + i;}); 
+
+arr1.filter(function(v) {return !v;});
+arr2.filter(function(v) {return !v;}); 
+
+arr1.reduce(function(p, c, i) {return p + c + i;}, '');
+arr2.reduce(function(p, c, i) {return p + c + i;}, '');
 ```
+- forEach
+  -arr1.forEach는 두 요소 모두 순회한다: `undefined 0, 1 1` 출력
+  -arr2.forEach는 존재하는 요소만 순회한다: `1 1`만 출력 (빈 슬롯 건너뜀)
+-map
+  -arr1.map은 두 요소 모두에 함수를 적용한다: `[NaN, 2]` 반환 (undefined + 0 = NaN)
+  -arr2.map은 존재하는 요소에만 함수를 적용한다: `[empty, 2]` 반환
+- filter
+  -arr1.filter는 두 요소 모두 검사한다: `[undefined]` 반환 (!undefined는 true)
+  -arr2.filter는 존재하는 요소만 검사한다: `[]` 반환 (빈 슬롯은 검사하지 않음)
+- reduce
+  -arr1.reduce는 두 요소 모두에 함수를 적용한다: 'undefined01' 반환
+  -arr2.reduce는 존재하는 요소에만 함수를 적용한다: '1' 반환
 
 ### 예제 1-22
 ```
