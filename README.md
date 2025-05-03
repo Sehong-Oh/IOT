@@ -2,7 +2,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 이 저장소는 코어 자바스크립트 책을 통한 JavaScript 학습 내용을 담고 있습니다.
 
-## 예제에 대한 설명은 각 Chapter 폴더 내부의 README.md에 있습니다.
+예제에 대한 설명은 각 Chapter 폴더 내부의 README.md에 있습니다.
 - [Chapter1 이동](./chapter1/README.md)
 - [Chapter2 이동](./chapter2/README.md)
 - [Chapter3 이동](./chapter3/README.md)
