@@ -1,5 +1,5 @@
 # 사물인터넷 과제 저장소(이름 : 오세홍)
-<img width="40" alt="tiger" src="https://github.com/user-attachments/assets/5ed42573-1e53-4833-ac26-467d6b767c42" />
+<img width="40" alt="tiger" src="https://github.com/user-attachments/assets/5ed42573-1e53-4833-ac26-467d6b767c42" />  
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 이 저장소는 코어 자바스크립트 책을 통한 JavaScript 학습 내용을 담고 있습니다.
 
