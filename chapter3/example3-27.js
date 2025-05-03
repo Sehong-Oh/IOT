@@ -5,7 +5,7 @@ var obj = {
         console.log(this);
       };
       innerFunc.call(this);
-    },
+    }
 };
 obj.outer();
 
@@ -16,6 +16,6 @@ var obj = {
         console.log(this);
     }.bind(this);
     innerFunc();
-    },
+    }
 };
 obj.outer();  

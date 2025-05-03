@@ -5,5 +5,4 @@ var obj = {
     length: 3,
 };
 var arr = Array.from(obj);
-console.log(arr);
-  
+console.log(arr)

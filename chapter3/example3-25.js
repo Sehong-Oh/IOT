@@ -8,4 +8,4 @@ bindFunc1(5, 6, 7, 8);
 
 var bindFunc2 = func.bind({ x: 1 }, 4, 5);
 bindFunc2(6, 7);
-bindFunc2(8, 9);  
+bindFunc2(8, 9);

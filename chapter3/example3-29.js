@@ -5,6 +5,6 @@ var obj = {
             console.log(this);
         };
         innerFunc();
-    },
+    }
 };
 obj.outer();

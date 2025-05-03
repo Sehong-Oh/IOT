@@ -7,7 +7,7 @@ var obj = {
     },
     logThisLater2: function() {
       setTimeout(this.logThis.bind(this), 1000);
-    },
+    }
 };
-obj.logThisLater1(); 
-obj.logThisLater2(); 
+obj.logThisLater1();
+obj.logThisLater2();
