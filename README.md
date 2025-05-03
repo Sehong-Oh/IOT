@@ -31,7 +31,7 @@
 - **1-6 undefined와 null**
 - **1-7 정리**
 
-<details>
+</details>
 
 ---
 
@@ -57,7 +57,7 @@
 - **1-6 undefined와 null**
 - **1-7 정리**
 
-<details>
+</details>
 
 ---
 
@@ -81,4 +81,4 @@
   - 3-2-6 별도의 인자로 this를 받는 경우(콜백 함수 내에서의 this)
 - **3-3 정리**
 
-<details>
+</details>
