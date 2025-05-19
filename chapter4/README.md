@@ -28,8 +28,24 @@ var timer = setInterval(function() {
 
 ### 예제 4-2
 ```javascript
+var count = 0;
+var cbFunc = function() {
+    console.log(count);
+    if (++count > 4) clearInterval(timer);
+};
 
+var timer = setInterval(cbFunc, 300);
 ```
+코드 동작 설명:
+- 처음에 `count` 변수가 0으로 초기화된다.
+- `cbFunc`라는 이름의 콜백 함수를 별도로 정의한다. 이 함수는:
+  - 현재 `count` 값을 콘솔에 출력한다.
+  - 전위 증가 연산자(`++count`)로 `count` 값을 1 증가시킨 후 조건을 확인한다.
+ - `count` 값이 4보다 크면 `clearInterval` 함수로 타이머를 중지한다.
+- `setInterval` 함수를 사용하여 `cbFunc` 함수를 300밀리초마다 반복 실행하는 타이머를 생성한다.
+- 타이머 ID가 `timer` 변수에 저장된다.
+- 이 코드는 앞의 예제와 기능적으로 동일하지만, 콜백 함수를 별도의 명명된 함수로 분리하여 코드의 가독성을 향상시켰다.
+
 
 ### 예제 4-3
 ```javascript
