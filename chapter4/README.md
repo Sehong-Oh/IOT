@@ -76,8 +76,26 @@ console.log(newArr);
 
 ### 예제 4-4
 ```javascript
+var newArr2 = [10, 20, 30].map(function(index, currentValue) {
+ console.log(index, currentValue);
+ return currentValue + 5;
+});
 
+console.log(newArr2);
 ```
+코드 동작 설명:
+- 초기 배열 `[10, 20, 30]`에 대해 `map` 메서드를 호출한다.
+- `map` 메서드는 배열의 각 요소를 순회하면서 콜백 함수를 실행한다.
+- 여기서 콜백 함수의 매개변수 이름을 원래 순서와 반대로 작성했다:
+ - `index`라는 이름으로 첫 번째 매개변수를 선언했지만, 실제로는 현재 요소의 값을 받는다.
+ - `currentValue`라는 이름으로 두 번째 매개변수를 선언했지만, 실제로는 인덱스 값을 받는다.
+- 콜백 함수 내부에서는:
+ - 두 값을 콘솔에 출력한다 (실제로는 값과 인덱스 순서로 출력된다).
+ - `currentValue + 5`를 반환하는데, 이 `currentValue`는 실제로 인덱스이다.
+- 따라서 결과 배열 `newArr2`는 `[5, 6, 7]`이 된다 (각 인덱스 0, 1, 2에 5를 더한 값).
+- 마지막으로 `newArr2` 배열을 콘솔에 출력한다.
+- 이 코드는 매개변수 이름이 중요한 것이 아니라 매개변수의 순서가 중요함을 보여준다.
+- JavaScript에서 `map`의 콜백 함수는 항상 (요소값, 인덱스, 원본배열) 순서로 인자를 전달한다.
 
 ### 예제 4-5
 ```javascript
