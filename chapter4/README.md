@@ -337,8 +337,45 @@ setTimeout(addEspresso, 500, '에스프레소');
 
 ### 예제 4-14
 ```javascript
-
+new Promise(function(resolve) {
+  setTimeout(function() {
+    var name = '에스프레소';
+    console.log(name);
+    resolve(name);
+  }, 500);
+}).then(function(prevName) {
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        var name = prevName + ', 아메리카노';
+        console.log(name);
+        resolve(name);
+      }, 500);
+    });
+  }).then(function(prevName) {
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        var name = prevName + ', 카페모카';
+        console.log(name);
+        resolve(name);
+      }, 500);
+    });
+  }).then(function(prevName) {
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        var name = prevName + ', 카페라떼';
+        console.log(name);
+        resolve(name);
+      }, 500);
+    });
+  });
 ```
+- 예제 4-12, 4-13의 콜백 구조를 Promise 체인으로 개선했다.
+- 각 단계는 새로운 Promise 객체를 생성하여 비동기 작업을 처리한다.
+- 첫 번째 Promise는 0.5초 후 "에스프레소"를 출력하고 이 값을 `resolve`한다.
+- 이후 `.then()` 메서드를 통해 이전 Promise의 결과(`prevName`)를 받아 다음 작업을 수행한다.
+- 각 `.then()`은 새 Promise를 반환하며, 이전 값에 새 커피 이름을 추가하고 출력한 후 `resolve`한다.
+- Promise 체인을 사용하면 중첩 없이 비동기 작업의 순서를 명확하게 표현할 수 있다.
+- Promise는 ES6에서 도입된 비동기 처리를 위한 표준 객체로, 콜백 지옥 문제를 효과적으로 해결한다.
 
 ### 예제 4-15
 ```javascript
