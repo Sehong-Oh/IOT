@@ -379,8 +379,32 @@ new Promise(function(resolve) {
 
 ### 예제 4-15
 ```javascript
+var addCoffee = function(name) {
+  return function(prevName) {
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        var newName = prevName ? prevName + ', ' + name : name;
+        console.log(newName);
+        resolve(newName);
+      }, 500);
+    });
+  };
+};
 
+addCoffee('에스프레소')()
+  .then(addCoffee('아메리카노'))
+  .then(addCoffee('카페모카'))
+  .then(addCoffee('카페라떼'));
 ```
+코드 동작 설명:
+- 예제 4-14를 더 개선하여 반복되는 코드를 함수로 추상화했다.
+- `addCoffee` 함수는 커피 이름을 받아 클로저를 반환한다.
+- 반환된 클로저는 이전 값(`prevName`)을 인자로 받아 새 Promise를 생성한다.
+- Promise 내부에서는 0.5초 후 이전 값에 새 커피 이름을 추가하고 출력한 후 `resolve`한다.
+- 첫 호출 `addCoffee('에스프레소')()`는 초기값 없이 "에스프레소"만 설정한다.
+- 이후 `.then()`을 통해 각 커피를 순차적으로 추가한다.
+- 이 패턴은 코드 중복을 줄이고 가독성을 높이며, 유사한 비동기 작업을 더 쉽게
+추가하거나 수정할 수 있게 한다.
 
 ### 예제 4-16
 ```javascript
