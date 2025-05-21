@@ -299,8 +299,41 @@ setTimeout(
 
 ### 예제 4-13
 ```javascript
+var coffeeList = '';
 
+var addEspresso = function(name) {
+    offeeList = name;
+    console.log(coffeeList);
+    setTimeout(addAmericano, 500, '아메리카노');
+};
+
+var addAmericano = function(name) {
+    coffeeList += ', ' + name;
+    console.log(coffeeList);
+    setTimeout(addMocha, 500, '카페모카');
+};
+
+var addMocha = function(name) {
+    coffeeList += ', ' + name;
+    console.log(coffeeList);
+    setTimeout(addLatte, 500, '카페라떼');
+};
+
+var addLatte = function(name) {
+    coffeeList += ', ' + name;
+    console.log(coffeeList);
+};
+
+setTimeout(addEspresso, 500, '에스프레소');
 ```
+코드 동작 설명:
+- 예제 4-12의 콜백 지옥을 개선하기 위해 각 단계를 기명 함수로 분리했다.
+- 전역 변수 `coffeeList`에 커피 이름을 누적한다.
+- 각 함수(`addEspresso`, `addAmericano`, `addMocha`, `addLatte`)는 특정 커피를 추가하고 다음 함수를 호출한다.
+- 첫 `setTimeout`은 0.5초 후 `addEspresso`를 호출하여 프로세스를 시작한다.
+- 각 함수는 현재 `coffeeList`를 출력하고 0.5초 후 다음 함수를 호출한다.
+- 기명 함수를 사용하면 중첩된 익명 함수보다 코드가 더 읽기 쉽고 관리하기 쉽다.
+- 최종 출력은 예제 4-12와 동일하게 0.5초 간격으로 나타난다.
 
 ### 예제 4-14
 ```javascript
