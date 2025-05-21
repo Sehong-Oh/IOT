@@ -99,8 +99,23 @@ console.log(newArr2);
 
 ### 예제 4-5
 ```javascript
-
+Array.prototype.map = function(callback, thisArg) {
+   var mappedArr = [];
+   for (var i = 0; i < this.length; i++) {
+       var mappedValue = callback.call(thisArg || window, this[i], i, this);
+       mappedArr[i] = mappedValue;
+   }
+   return mappedArr;
+};
 ```
+코드 동작 설명:
+- Array 객체의 prototype에 map 메서드를 직접 구현한다.
+- 함수는 콜백 함수와 선택적 `this` 컨텍스트를 매개변수로 받는다.
+- 빈 결과 배열 `mappedArr`을 생성하고, 원본 배열의 각 요소를 순회한다.
+- 각 요소에 대해 `callback.call()`을 사용해 콜백 함수를 호출하고, 그 결과를 새 배열의 같은 위치에 저장한다.
+- 콜백 함수는 (현재값, 인덱스, 원본배열) 세 가지 인자를 받는다.
+- 모든 요소 처리 후 새 배열을 반환한다.
+- 이 구현은 JavaScript 내장 map 메서드의 기본 동작을 재현한다.
 
 ### 예제 4-6
 ```javascript
