@@ -172,9 +172,26 @@ outer = null;                       // outer 식별자의 inner 함수 참조를
 
 ### 예제 5-6
 ```javascript
+var fruits = ['apple', 'banana', 'peach'];
+var $ul = document.createElement('ul');     // (공통 코드)
 
+fruits.forEach(function(fruit) {            // (A)
+	var $li = document.createElement('li');
+	$li.innerText = fruit;
+	$li.addEventListener('click', function() {  // (B)
+		alert('your choice is ' + fruit);
+	});
+	$ul.appendChild($li);
+});
+document.body.appendChild($ul);
 ```
-
+코드 동작 설명:
+- 과일 이름이 담긴 배열 `fruits`과 `<ul>` 요소를 생성한다.
+- `forEach` 메서드로 각 과일에 대해 `<li>` 요소를 생성하고 과일 이름을 텍스트로 설정한다.
+- 각 `<li>` 요소에 클릭 이벤트 리스너를 추가한다. 이 리스너는 클로저를 형성하여 해당 반복에서의 `fruit` 값을 기억한다.
+- 사용자가 특정 `<li>`를 클릭하면 해당 과일 이름이 알림으로 표시된다.
+- 이 패턴은 반복문 내에서 이벤트 핸들러를 등록할 때 각 핸들러가 올바른 데이터에 접근할 수 있게 한다.
+- 클로저가 없다면 모든 핸들러가 마지막 반복의 `fruit` 값만 참조하게 될 것이다.
 
 ### 예제 5-7
 ```javascript
