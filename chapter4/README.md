@@ -119,8 +119,28 @@ Array.prototype.map = function(callback, thisArg) {
 
 ### 예제 4-6
 ```javascript
+setTimeout(function () {console.log(this);}, 300);
 
+[1,2,3,4,5].forEach(function (x) {
+    console.log(this);
+});
+
+document.body.innerHTML += '<button id = "a"> 클릭 </button>';
+document.body.querySelector('#a')
+    .addEventListener('click', function (e){
+        console.log(this, e);
+    }
+);
 ```
+코드 동작 설명:
+- 첫 번째 코드는 `setTimeout` 함수에서 콜백 함수 내부의 `this`를 출력한다.
+  - 일반 함수로서 호출되었으므로 `this`는 전역 객체(Window)를 가리킨다.
+- 두 번째 코드는 배열의 `forEach` 메서드에서 콜백 함수 내부의 `this`를 출력한다.
+  - 역시 일반 함수로서 호출되어 `this`는 전역 객체를 가리킨다.
+- 세 번째 코드는 이벤트 리스너에서 콜백 함수 내부의 `this`를 출력한다.
+  - 이벤트 리스너에서는 `this`가 이벤트가 발생한 요소(버튼)를 가리킨다.
+- 이 예제는 함수 호출 방식에 따라 `this`가 어떻게 달라지는지 보여준다.
+
 
 ### 예제 4-7
 ```javascript
