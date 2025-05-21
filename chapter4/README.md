@@ -144,8 +144,22 @@ document.body.querySelector('#a')
 
 ### 예제 4-7
 ```javascript
-
+var obj = {
+  vals : [1, 2, 3],
+  logValues : function(v, i) {
+    console.log(this, v, i);
+  },
+};
+obj.logValues(1, 2); 
+[4, 5, 6].forEach(obj.logValues);
 ```
+코드 동작 설명:
+- `obj` 객체는 배열 `vals`와 메서드 `logValues`를 가지고 있다.
+- 첫 번째 호출 `obj.logValues(1, 2)`는 메서드로서 직접 호출되어 `this`가 `obj` 객체를 가리킨다.
+- 두 번째 호출에서는 `obj.logValues`를 `forEach`의 콜백 함수로 전달한다.
+  - 이때 함수는 메서드가 아닌 일반 함수로서 호출되어 `this`는 전역 객체(Window)를 가리킨다.
+- 이 예제는 같은 함수도 호출 방식에 따라 `this`가 달라질 수 있음을 보여준다.
+
 
 ### 예제 4-8
 ```javascript
