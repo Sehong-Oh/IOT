@@ -408,8 +408,35 @@ addCoffee('에스프레소')()
 
 ### 예제 4-16
 ```javascript
+var addCoffee = function(prevName, name) {
+  setTimeout(function() {
+    coffeeMaker.next(prevName ? prevName + ', ' + name : name);
+  }, 500);
+};
 
+var coffeeGenerator = function*() {
+  var espresso = yield addCoffee('', '에스프레소');
+  console.log(espresso);
+  var americano = yield addCoffee(espresso,'아메리카노');
+  console.log(americano);
+  var mocha = yield addCoffee(americano, '카페모카');
+  console.log(mocha);
+  var latte = yield addCoffee(mocha, '카페라떼');
+  console.log(latte);
+};
+
+var coffeeMaker = coffeeGenerator();
+
+coffeeMaker.next();
 ```
+코드 동작 설명:
+- ES6의 Generator 함수를 사용하여 비동기 작업의 흐름을 제어한다.
+- `addCoffee` 함수는 이전 이름과 새 커피 이름을 받아 0.5초 후 Generator의 `next` 메서드를 호출한다.
+- `coffeeGenerator` 함수는 Generator 함수로, `yield` 키워드를 사용해 실행을 일시 중단하고 외부 값을 기다린다.
+- 각 `yield` 표현식은 `addCoffee` 함수를 호출하고, 그 결과를 변수에 할당한 후 출력한다.
+- `coffeeMaker`는 Generator 객체로, `next()` 메서드 호출로 실행을 시작한다.
+- Generator를 사용하면 비동기 코드를 동기 코드처럼 작성할 수 있어 가독성이 향상된다.
+- 이 방식은 Promise와 달리 실행 흐름을 더 세밀하게 제어할 수 있다는 장점이 있다.
 
 ### 예제 4-17
 ```javascript
