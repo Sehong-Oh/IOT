@@ -195,9 +195,34 @@ document.body.appendChild($ul);
 
 ### 예제 5-7
 ```javascript
+var fruits = ['apple', 'banana', 'peach'];
+var $ul = document.createElement('ul');
 
+var alertFruit = function(fruit) {
+	alert('your choice is ' + fruit);
+};
+
+fruits.forEach(function(fruit) {
+	var $li = document.createElement('li');
+	$li.innerText = fruit;
+	$li.addEventListener('click', alertFruit);
+	$ul.appendChild($li);
+});
+
+document.body.appendChild($ul);
+alertFruit(fruits[1]);
 ```
+코드 동작 설명:
+- 과일 이름이 담긴 배열 `fruits`과 `<ul>` 요소를 생성한다.
+- 공통 함수 `alertFruit`를 정의하여 과일 이름을 알림으로 표시한다.
+- `forEach` 메서드로 각 과일에 대해 `<li>` 요소를 생성하고 과일 이름을 텍스트로 설정한다.
+- 각 `<li>` 요소에 클릭 이벤트 리스너로 `alertFruit` 함수를 추가한다.
+- 마지막으로 `alertFruit(fruits[1])`을 직접 호출하여 "banana"를 알림으로 표시한다.
 
+- 문제점: 이벤트 리스너로 등록된 `alertFruit` 함수는 클릭 이벤트 발생 시 이벤트 객체만 전달받기 때문에 
+  어떤 과일이 선택되었는지 알 수 없다. 따라서 클릭 시 "your choice is undefined"가 표시된다.
+
+이 예제는 이벤트 리스너에 공통 함수를 사용할 때 발생할 수 있는 문제점을 보여준다.
 
 ### 예제 5-8
 ```javascript
