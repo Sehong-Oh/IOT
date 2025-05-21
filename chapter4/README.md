@@ -185,8 +185,20 @@ setTimeout(callback, 1000);
 
 ### 예제 4-9
 ```javascript
+var obj1 = {
+    name: 'obj1',
+    func: function() {
+        console.log(obj1.name);
+    },
+};
 
+setTimeout(obj1.func, 1000);
 ```
+코드 동작 설명:
+- `obj1` 객체는 `name` 속성과 `func` 메서드를 가지고 있다.
+- `func` 메서드 내부에서 `this` 대신 직접 `obj1`을 참조한다.
+- 이렇게 하면 메서드가 어떻게 호출되든 항상 `obj1.name`을 출력한다.
+- 이 방법은 간단하지만 참조하는 객체가 변경되면 코드를 수정해야 하는 단점이 있다.
 
 ### 예제 4-10
 ```javascript
