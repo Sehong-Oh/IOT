@@ -228,13 +228,74 @@ setTimeout(callback3, 2000);
 
 ### 예제 4-11
 ```javascript
+var obj1 = {
+    name: 'obj1',
+    func: function() {
+        console.log(this.name);
+    },
+};
+setTimeout(obj1.func.bind(obj1), 1000);
 
+var obj2 = { name: 'obj2' };
+setTimeout(obj1.func.bind(obj2), 1500);
 ```
+코드 동작 설명:
+- `obj1` 객체는 `name` 속성과 `func` 메서드를 가지고 있다.
+- `func` 메서드 내부에서 `this.name`을 출력하여 동적으로 컨텍스트를 참조한다.
+- 첫 번째 `setTimeout`에서 `obj1.func`에 `bind(obj1)`을 사용하여 `this`를 `obj1`로 고정한다.
+- 두 번째 `setTimeout`에서 `obj1.func`에 `bind(obj2)`를 사용하여 `this`를 `obj2`로 고정한다.
+- 이 방법으로 함수가 어떻게 호출되든 원하는 컨텍스트를 `this`로 사용할 수 있다.
+- `bind`는 ES5에서 도입된 메서드로, 함수의 `this`를 영구적으로 바인딩하는 새 함수를 반환한다.
 
 ### 예제 4-12
 ```javascript
+setTimeout(
+  function(name) {
+    var coffeeList = name;
+    console.log(coffeeList);
 
+    setTimeout(
+      function(name) {
+        coffeeList += ', ' + name;
+        console.log(coffeeList);
+
+        setTimeout(
+          function(name) {
+            coffeeList += ', ' + name;
+            console.log(coffeeList);
+
+            setTimeout(
+              function(name) {
+                coffeeList += ', ' + name;
+                console.log(coffeeList);
+              },
+              500,
+              '카페라떼'
+            );
+          },
+          500,
+          '카페모카'
+        );
+      },
+      500,
+      '아메리카노'
+    );
+  },
+  500,
+  '에스프레소'
+);
 ```
+코드 동작 설명:
+- 이 코드는 중첩된 `setTimeout` 호출로 구성되어 비동기 작업을 순차적으로 처리한다.
+- 첫 번째 `setTimeout`은 0.5초 후 "에스프레소"를 `coffeeList`에 저장하고 출력한다.
+- 이후 내부 `setTimeout`들이 각각 0.5초 간격으로 "아메리카노", "카페모카", "카페라떼"를 누적하여 추가한다.
+- 각 단계에서 현재까지의 `coffeeList`를 출력한다.
+- 이러한 깊게 중첩된 콜백 구조는 가독성과 유지보수성이 떨어져 "콜백 지옥"이라 불린다.
+- 최종 출력은 다음과 같이 0.5초 간격으로 나타난다:
+  - "에스프레소"
+  - "에스프레소, 아메리카노"
+  - "에스프레소, 아메리카노, 카페모카"
+  - "에스프레소, 아메리카노, 카페모카, 카페라떼"
 
 ### 예제 4-13
 ```javascript
