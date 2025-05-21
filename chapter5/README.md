@@ -22,8 +22,23 @@ outer();
 
 ### 예제 5-2
 ```javascript
+var outer = function() {
+	var a = 1;
+	var inner = function() {
+		return ++a;
+	};
+	return inner();
+};
 
+var outer2 = outer();
+console.log(outer2);
 ```
+코드 동작 설명:
+- `outer` 함수는 변수 `a`와 내부 함수 `inner`를 정의한다.
+- `inner` 함수는 `a`를 증가시키고 그 값을 반환한다.
+- `outer` 함수는 `inner` 함수를 실행한 결과(2)를 반환한다.
+- `outer2`에는 `outer()` 호출의 반환값인 2가 할당되고, 이 값이 출력된다.
+- 이 예제는 내부 함수의 실행 결과를 외부로 전달하는 패턴을 보여준다.
 
 ### 예제 5-3
 ```javascript
