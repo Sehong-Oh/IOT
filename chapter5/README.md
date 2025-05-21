@@ -42,8 +42,26 @@ console.log(outer2);
 
 ### 예제 5-3
 ```javascript
+var outer = function() {
+	var a = 1;
+	var inner = function() {
+		return ++a;
+	};
+	return inner;
+};
 
+var outer2 = outer();
+console.log(outer2());
+console.log(outer2());
 ```
+코드 동작 설명:
+- `outer` 함수는 변수 `a`와 내부 함수 `inner`를 정의한다.
+- `inner` 함수는 `a`를 증가시키고 그 값을 반환한다.
+- `outer` 함수는 `inner` 함수 자체를 반환한다(실행 결과가 아니라 함수 자체).
+- `outer2`에는 `outer()` 호출로 반환된 `inner` 함수가 할당된다.
+- `outer2()`를 호출하면 `inner` 함수가 실행되고, `a`가 2로 증가된 후 반환된다.
+- 다시 `outer2()`를 호출하면 동일한 `inner` 함수가 실행되고, `a`는 이전 상태인 2에서 3으로 증가된다.
+- 이 예제는 클로저를 통해 함수가 자신이 생성될 때의 환경(변수 `a`)을 기억하고 접근하는 것을 보여준다.
 
 
 ### 예제 5-4
