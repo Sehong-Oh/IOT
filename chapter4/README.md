@@ -163,8 +163,25 @@ obj.logValues(1, 2);
 
 ### 예제 4-8
 ```javascript
+var obj = {
+    name: 'obj1',
+    func: function() {
+        var self = this;
+        return function() {
+            console.log(self.name);
+        };
+    }
+};
 
+var callback = obj.func();
+setTimeout(callback, 1000);
 ```
+코드 동작 설명:
+- `obj1` 객체는 `name` 속성과 `func` 메서드를 가지고 있다.
+- `func` 메서드 내부에서 `this`를 `self` 변수에 저장한 후, 내부 함수를 반환한다.
+- 내부 함수는 클로저를 통해 `self`(원래 `obj1`을 가리키는 `this`)에 접근할 수 있다.
+- `callback`으로 할당된 내부 함수는 비동기적으로 실행되어도 `obj1.name`을 올바르게 출력한다.
+- 이 패턴은 `this`가 달라지는 문제를 우회하기 위해 클로저를 활용하는 전통적인 방법이다.
 
 ### 예제 4-9
 ```javascript
