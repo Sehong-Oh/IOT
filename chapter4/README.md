@@ -202,8 +202,29 @@ setTimeout(obj1.func, 1000);
 
 ### 예제 4-10
 ```javascript
+var obj1 = {
+  name: 'obj1',
+  func: function() {
+    console.log(obj1.name);
+  },
+};
+var obj2 = {
+  name: 'obj2',
+  func: obj1.func,
+};
+var callback2 = obj2.func();
+setTimeout(callback2, 1500);
 
+var obj3 = { name: 'obj3' };
+var callback3 = obj1.func.call(obj3);
+setTimeout(callback3, 2000);
 ```
+코드 동작 설명:
+- 예제 4-9의 확장으로, 객체를 직접 참조할 때 발생할 수 있는 문제를 보여준다.
+- `obj2`는 `obj1`의 `func` 메서드를 참조하지만, 함수 내부에서는 여전히 `obj1.name`을 참조한다.
+- `callback2`는 `obj2.func()`를 호출한 결과인데, 이때 함수 내부에서 `obj1.name`을 출력한다.
+- `callback3`는 `obj1.func`를 `obj3` 컨텍스트로 호출하지만, 함수 내부에서 여전히 `obj1.name`을 참조한다.
+- 이 예제는 `this` 대신 객체를 직접 참조하면 유연성이 떨어지는 문제를 보여준다.
 
 ### 예제 4-11
 ```javascript
