@@ -107,9 +107,68 @@ console.log(outer2());
 
 ### 예제 5-5
 ```javascript
+// 클로저의 메모리관리 예시 들
+// (1) return에 의한 클로저의 메모리 해제
+var outer = (function() {
+	var a = 1;
+	var inner = function() {
+		return ++a;
+	};
+	return inner;
+})();
 
+console.log(outer());
+console.log(outer());
+outer = null;                       // outer 식별자의 inner 함수 참조를 끊음
+
+
+// (2) setInterval에 의한 클로저의 메모리 해제
+(function() {
+	var a = 0;
+	var intervalId = null;
+	var inner = function() {
+		if (++a >= 10) {
+			clearInterval(intervalId);
+			inner = null;               // inner 식별자의 함수 참조를 끊음
+		}
+		console.log(a);
+	};
+	intervalId = setInterval(inner, 1000);
+})();
+
+// (3) eventListener에 의한 클로저의 메모리 해제
+(function() {
+	var count = 0;
+	var button = document.createElement('button');
+	button.innerText = 'click';
+
+	var clickHandler = function() {
+		console.log(++count, 'times clicked');
+		if (count >= 10) {
+			button.removeEventListener('click', clickHandler);
+			clickHandler = null;        // clickHandler 식별자의 함수참조를 끊음
+		}
+	};
+	button.addEventListener('click', clickHandler);
+	document.body.appendChild(button);
+})();
 ```
+코드 동작 설명:
+- (1) return에 의한 클로저의 메모리 해제
+  - 즉시 실행 함수로 `inner` 함수를 생성하여 `outer`에 할당한다.
+  - `outer()`를 두 번 호출하여 각각 2, 3을 출력한다.
+  - `outer = null`로 설정하여 `inner` 함수에 대한 참조를 제거한다.
+  - 이로써 `inner` 함수는 더 이상 접근할 수 없게 되고, 가비지 컬렉션의 대상이 된다.
 
+- (2) setInterval에 의한 클로저의 메모리 해제
+  - `inner` 함수는 `a`가 10 이상이 되면 타이머를 중지하고 자신에 대한 참조를 제거한다.
+  - `inner = null`을 통해 함수 참조를 명시적으로 끊음으로써 메모리 누수를 방지한다.
+
+- (3) eventListener에 의한 클로저의 메모리 해제
+  - 클릭 핸들러는 클릭 횟수가 10회 이상이 되면 이벤트 리스너를 제거하고 자신에 대한 참조를 끊는다.
+  - `removeEventListener`와 `clickHandler = null`을 통해 핸들러 함수의 참조를 제거한다.
+
+이 예제들은 클로저 사용 시 메모리 관리의 중요성과 참조를 명시적으로 제거하는 방법을 보여준다.
 
 ### 예제 5-6
 ```javascript
