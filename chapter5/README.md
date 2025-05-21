@@ -66,8 +66,43 @@ console.log(outer2());
 
 ### 예제 5-4
 ```javascript
+// return 없이도 클로저가 발생하는 경우
+// (1) setInterval/setTimeout
+(function() {
+	var a = 0;
+	var intervalId = null;
+	var inner = function() {
+		if (++a >= 10) {
+			clearInterval(intervalId);
+		}
+		console.log(a);
+	};
+	intervalId = setInterval(inner, 1000);
+})();
 
+// (2) eventListener
+(function() {
+	var count = 0;
+	var button = document.createElement('button');
+	button.innerText = 'click';
+	button.addEventListener('click', function() {
+		console.log(++count, 'times clicked');
+	});
+	document.body.appendChild(button);
+})();
 ```
+코드 동작 설명:
+- (1) setInterval/setTimeout 예제
+  - 즉시 실행 함수(IIFE) 내에서 변수 `a`와 `intervalId`, 그리고 함수 `inner`를 정의한다.
+  - `inner` 함수는 `a`를 증가시키고, 10 이상이 되면 `intervalId`로 식별되는 타이머를 중지한다.
+  - `setInterval`로 `inner` 함수를 1초마다 실행하도록 설정하고, 그 ID를 `intervalId`에 저장한다.
+  - 클로저를 통해 `inner` 함수가 외부 변수 `a`와 `intervalId`에 계속 접근할 수 있다.
+
+- (2) eventListener 예제
+  - 즉시 실행 함수(IIFE) 내에서 변수 `count`와 버튼 요소를 생성한다.
+  - 버튼에 클릭 이벤트 리스너를 추가하는데, 이 리스너는 클로저를 형성하여 `count` 변수에 접근한다.
+  - 버튼이 클릭될 때마다 `count`가 증가하고 클릭 횟수가 출력된다.
+  - 클로저를 통해 이벤트 핸들러 함수가 외부 변수 `count`에 계속 접근할 수 있다.
 
 
 ### 예제 5-5
