@@ -440,6 +440,36 @@ coffeeMaker.next();
 
 ### 예제 4-17
 ```javascript
+var addCoffee = function(name) {
+  return new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve(name);
+    }, 500);
+  });
+};
 
+var coffeeMaker = async function() {
+  var coffeeList = '';
+  var _addCoffee = async function(name) {
+    coffeeList += (coffeeList ? ',' : '') + (await addCoffee(name));
+  };
+  await _addCoffee('에스프레소');
+  console.log(coffeeList);
+  await _addCoffee('아메리카노');
+  console.log(coffeeList);
+  await _addCoffee('카페모카');
+  console.log(coffeeList);
+  await _addCoffee('카페라떼');
+  console.log(coffeeList);
+};
+
+coffeeMaker();
 ```
-
+코드 동작 설명:
+- ES2017에서 도입된 async/await 문법을 사용하여 비동기 작업을 동기 코드처럼 작성한다.
+- `addCoffee` 함수는 커피 이름을 받아 Promise를 반환한다.
+- `coffeeMaker` 함수는 async 함수로, 내부에서 await 키워드를 사용하여 Promise 결과를 기다린다.
+- 내부 `_addCoffee` 함수는 async 함수로, await를 사용하여 `addCoffee` 호출 결과를 기다린 후 `coffeeList`에 추가한다.
+- 각 `await _addCoffee` 호출 후에는 현재 `coffeeList`를 출력한다.
+- async/await 문법은 Promise 기반이지만 코드를 더 동기적으로 작성할 수 있게 해준다.
+- 이 방식은 가장 최신의 비동기 처리 패턴으로, 가독성이 높고 에러 처리도 try/catch로 간단하게 할 수 있다.
