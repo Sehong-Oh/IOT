@@ -226,9 +226,30 @@ alertFruit(fruits[1]);
 
 ### 예제 5-8
 ```javascript
+var fruits = ['apple', 'banana', 'peach'];
+var $ul = document.createElement('ul');
 
+var alertFruit = function(fruit) {
+	alert('your choice is ' + fruit);
+};
+fruits.forEach(function(fruit) {
+	var $li = document.createElement('li');
+	$li.innerText = fruit;
+	$li.addEventListener('click', alertFruit.bind(null, fruit));
+	$ul.appendChild($li);
+});
+
+document.body.appendChild($ul);
 ```
+코드 동작 설명:
+- 예제 5-7의 문제를 해결하기 위해 `bind` 메서드를 활용한다.
+- `bind` 메서드는 함수의 `this`와 첫 번째 이후 인자들을 부분적으로 적용한 새 함수를 반환한다.
+- 각 `<li>` 요소에 이벤트 리스너로 `alertFruit.bind(null, fruit)`를 등록한다.
+  - 첫 번째 인자 `null`은 `this`에 바인딩할 값으로, 여기서는 중요하지 않다.
+  - 두 번째 인자 `fruit`는 `alertFruit` 함수의 첫 번째 매개변수로 미리 바인딩된다.
+- 클릭 이벤트 발생 시, 바인딩된 `fruit` 값이 `alertFruit` 함수에 전달되어 올바르게 동작한다.
 
+이 방식의 장점은 하나의 함수로 여러 요소의 이벤트를 처리하면서도 각 요소에 맞는 데이터를 전달할 수 있다는 것이다.
 
 ### 예제 5-9
 ```javascript
