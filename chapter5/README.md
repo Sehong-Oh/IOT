@@ -464,9 +464,61 @@ dog.greet('입니다!');
 
 ### 예제 5-15
 ```javascript
+Object.defineProperty(window, '_', {
+    value: 'EMPTY_SPACE',
+    writable: false,
+    configurable: false,
+    enumerable: false,
+});
 
+var partial2 = function() {
+     var originalPartialArgs = arguments;
+    var func = originalPartialArgs[0];
+    if (typeof func !== 'function') {
+    	throw new Error('첫 번째 인자가 함수가 아닙니다.');
+    }
+    return function() {
+    	var partialArgs = Array.prototype.slice.call(originalPartialArgs, 1);
+    	var restArgs = Array.prototype.slice.call(arguments);
+    	for (var i = 0; i < partialArgs.length; i++) {
+    		if (partialArgs[i] === _) {
+    			partialArgs[i] = restArgs.shift();
+    		}
+    	}
+    	return func.apply(this, partialArgs.concat(restArgs));
+    };
+};
+
+var add = function() {
+    var result = 0;
+    for (var i = 0; i < arguments.length; i++) {
+    	result += arguments[i];
+    }
+    return result;
+};
+
+var addPartial = partial2(add, 1, 2, _, 4, 5, _, _, 8, 9);
+console.log(addPartial(3, 6, 7, 10)); 
+
+var dog = {
+    name: '강아지',
+    greet: partial2(function(prefix, suffix) {
+    	return prefix + this.name + suffix;
+    }, '왈왈, '),
+};
+
+dog.greet('배고파요!');
 ```
-
+코드 동작 설명:
+- `Object.defineProperty`를 사용하여 전역 객체에 `_` 상수를 정의한다.
+ - `value`: '_'의 값은 'EMPTY_SPACE' 문자열로 설정한다.
+ - `writable: false`: 값을 변경할 수 없게 한다.
+ - `configurable: false`: 속성을 삭제하거나 다시 정의할 수 없게 한다.
+ - `enumerable: false`: 열거할 수 없게 하여 for...in 루프에서 나타나지 않게 한다.
+- `partial2` 함수는 `partial`을 확장하여 플레이스홀더(`_`)를 지원한다.
+- 반환되는 함수는 호출 시 전달된 인자들을 플레이스홀더 위치에 순서대로 채운다.
+- `restArgs.shift()`를 사용하여 전달된 인자를 순서대로 플레이스홀더에 할당한다.
+- 플레이스홀더를 모두 채운 후 남은 인자들은 기존처럼 뒤에 연결된다.
 
 ### 예제 5-16
 ```javascript
