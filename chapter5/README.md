@@ -581,5 +581,23 @@ console.log(getMinWith10(25));
 
 ### 예제 5-18
 ```javascript
+var curry5 = function(func) {
+	return function(a) {
+		return function(b) {
+			return function(c) {
+				return function(d) {
+					return function(e) {
+						return func(a, b, c, d, e);
+					};
+				};
+			};
+		};
+	};
+};
 
+var getMax = curry5(Math.max);
+console.log(getMax(1)(2)(3)(4)(5));
 ```
+코드 동작 설명:
+- `curry5` 함수는 5개의 인자를 받는 함수를 커링된 형태로 변환한다.
+- 중첩된 함수를 통해 각각의 인자를 하나씩 받아서 최종적으로 원본 함수를 호출한다.
