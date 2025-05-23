@@ -283,9 +283,31 @@ document.body.appendChild($ul);
 
 ### 예제 5-10
 ```javascript
-
+var car = {
+	fuel: Math.ceil(Math.random() *10+10), 
+	power: Math.ceil(Math.random() *3+2), 
+	moved: 0, 
+	run: function() {
+		var km = Math.ceil(Math.random() *6);
+		var wasteFuel = km / this.power;
+		if (this.fuel < wasteFuel) {
+			console.log('이동불가');
+			return;
+		}
+		this.fuel -= wasteFuel;
+		this.moved += km;
+		console.log(km + 'km 이동 (총 ' + this.moved + 'km)');
+	},
+};
 ```
+코드 동작 설명:
+- 자동차 객체 `car`를 정의하며 연료량, 연비, 이동거리 등의 속성과 `run` 메서드를 가진다.
+- `run` 메서드는 무작위로 생성된 거리만큼 자동차를 이동시키고, 연료 소모와 이동거리 증가를 처리한다.
+- 연료가 부족하면 "이동불가" 메시지를 출력하고 함수를 종료한다.
+- 이동 가능한 경우 연료를 소모하고 이동거리를 증가시킨 후 결과를 출력한다.
 
+문제점: 이 객체는 모든 속성이 외부에서 직접 접근 가능하다. 
+예를 들어 `car.fuel = 1000;`과 같이 속성을 임의로 변경할 수 있어 객체의 무결성을 해칠 수 있다.
 
 ### 예제 5-11
 ```javascript
