@@ -350,9 +350,44 @@ var car = createCar();
 
 ### 예제 5-12
 ```javascript
+var createCar = function() {
+	var fuel = Math.ceil(Math.random() * 10 + 10);      // 연료
+	var power = Math.ceil(Math.random() * 3 + 2);       // 연비
+	var moved = 0;                                      // 총 이동거리
 
+	var publicMembers = {
+		get moved() {
+			return moved;
+		},
+		run: function() {
+			var km = Math.ceil(Math.random() * 6);
+			var wasteFuel = km / power;
+			if (fuel < wasteFuel) {
+				console.log('이동불가');
+				return;
+			}
+			fuel -= wasteFuel;
+			moved += km;
+			console.log(km + 'km 이동 (총 ' + moved + 'km). 남은 연료: ' + fuel);
+		}
+	};
+
+	Object.freeze(publicMembers);
+	return publicMembers;
+};
 ```
+코드 동작 설명:
+- 예제 5-11을 확장하여 반환되는 객체에 `Object.freeze`를 적용한다.
+- `createCar` 함수는 자동차 객체를 생성하는 것은 이전과 동일하다.
+- 반환하기 전에 `publicMembers` 객체에 `Object.freeze`를 적용한다.
+- 이로써 반환된 객체의 프로퍼티를 추가, 삭제, 수정할 수 없게 된다.
 
+이 구현의 장점:
+- 내부 변수들은 클로저를 통해 보호되어 직접 접근할 수 없다.
+- `Object.freeze`를 통해 반환된 객체의 구조도 변경할 수 없다.
+- 완전한 캡슐화와 불변성을 제공하여 객체의 무결성을 강화한다.
+
+`Object.freeze`는 객체를 동결하여 프로퍼티 추가/삭제/수정을 방지하는 ES5 메서드이다.
 
 ### 예제 5-13
 ```javascript
