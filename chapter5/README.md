@@ -413,9 +413,54 @@ console.log(addPartial(6, 7, 8, 9, 10));        //55
 
 ### 예제 5-14
 ```javascript
+var partial = function() {
+	var originalPartialArgs = arguments;
+	var func = originalPartialArgs[0];
+	if (typeof func !== 'function') {
+		throw new Error('첫 번째 인자가 함수가 아닙니다.');
+	}
+	return function() {
+		var partialArgs = Array.prototype.slice.call(originalPartialArgs, 1);
+		var restArgs = Array.prototype.slice.call(arguments);
+		return func.apply(this, partialArgs.concat(restArgs));
+	};
+};
 
+var add = function() {
+	var result = 0;
+	for (var i = 0; i < arguments.length; i++) {
+		result += arguments[i];
+	}
+	return result;
+};
+
+var addPartial = partial(add, 1, 2, 3, 4, 5);
+console.log(addPartial(6, 7, 8, 9, 10)); 
+
+var dog = {
+	name: '강아지',
+	greet: partial(function(prefix, suffix) {
+		return prefix + this.name + suffix;
+	}, '왈왈, ')
+};
+dog.greet('입니다!');
+// 왈왈, 강아지입니다.
 ```
+코드 동작 설명:
+- `partial` 함수는 함수와 인자들을 받아 부분 적용된 새 함수를 반환한다.
+- 첫 번째 인자가 함수가 아니면 에러를 발생시킨다.
+- 반환되는 함수는 클로저를 통해 원본 함수와 부분 적용된 인자들에 접근한다.
+- 호출 시 전달된 나머지 인자들과 부분 적용된 인자들을 연결하여 원본 함수를 호출한다.
+- `apply` 메서드를 사용하여 `this` 컨텍스트를 유지한다.
 
+두 가지 예제로 활용:
+1. `add` 함수에 1부터 5까지의 숫자를 부분 적용하여 `addPartial` 함수를 생성한다.
+   - `addPartial(6, 7, 8, 9, 10)`을 호출하면 모든 인자의 합인 55가 반환된다.
+
+2. 객체 메서드에서의 활용:
+   - `dog` 객체의 `greet` 메서드는 `partial`을 사용하여 접두사를 미리 설정한다.
+   - `dog.greet('입니다!')`를 호출하면 "왈왈, 강아지입니다!"가 반환된다.
+   - 이 때 `this`가 올바르게 `dog` 객체를 가리키는 것이 중요하다.
 
 ### 예제 5-15
 ```javascript
