@@ -391,8 +391,24 @@ var createCar = function() {
 
 ### 예제 5-13
 ```javascript
+var add = function() {
+	var result = 0;
+	for (var i = 0; i < arguments.length; i++) {
+		result += arguments[i];
+	}
+	return result;
+};
 
+var addPartial = add.bind(null, 1, 2, 3, 4, 5);
+console.log(addPartial(6, 7, 8, 9, 10));        //55
 ```
+코드 동작 설명:
+- `add` 함수는 가변 인자를 받아 모든 인자의 합을 반환한다.
+- `addPartial`은 `add.bind(null, 1, 2, 3, 4, 5)`로 정의된다.
+  - `bind` 메서드의 첫 번째 인자 `null`은 `this` 바인딩을 위한 것으로, 여기서는 중요하지 않다.
+  - 나머지 인자 `1, 2, 3, 4, 5`는 `add` 함수의 첫 다섯 개 인자로 미리 바인딩된다.
+- `addPartial(6, 7, 8, 9, 10)`을 호출하면, 실제로는 `add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)`이 호출된다.
+- 결과적으로 모든 인자의 합인 55가 출력된다.
 
 
 ### 예제 5-14
