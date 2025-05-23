@@ -311,8 +311,42 @@ var car = {
 
 ### 예제 5-11
 ```javascript
+var createCar = function() {
+	var fuel = Math.ceil(Math.random() * 10 + 10);      // 연료
+	var power = Math.ceil(Math.random() * 3 + 2);       // 연비
+	var moved = 0;                                      // 총 이동거리
+	return {
+		get moved() {
+			return moved;
+		},
+		run: function() {
+			var km = Math.ceil(Math.random() * 6);
+			var wasteFuel = km / power;
+			if (fuel < wasteFuel) {
+				console.log('이동불가');
+				return;
+			}
+			fuel -= wasteFuel;
+			moved += km;
+			console.log(km + 'km 이동 (총 ' + moved + 'km). 남은 연료: ' + fuel);
+		}
+	};
+};
 
+var car = createCar();
 ```
+코드 동작 설명:
+- `createCar` 함수는 자동차 객체를 생성하여 반환한다.
+- 함수 내부에서 `fuel`, `power`, `moved` 변수를 선언하여 외부에서 직접 접근할 수 없게 한다.
+- 반환되는 객체는 `moved` 속성에 대한 getter와 `run` 메서드만 포함한다.
+- `moved` getter는 내부 변수 `moved`의 값을 반환한다.
+- `run` 메서드는 내부 변수 `fuel`, `power`, `moved`에 접근하여 자동차의 이동을 처리한다.
+
+이 구현의 장점:
+- 내부 변수들(fuel, power)에 직접 접근할 수 없어 객체의 무결성이 보장된다.
+- 클로저를 통해 객체의 메서드가 내부 변수에 접근할 수 있으므로 캡슐화와 정보 은닉을 구현할 수 있다.
+- `moved` 속성은 getter만 제공하여 읽기만 가능하고 외부에서 수정할 수 없다.
+
 
 ### 예제 5-12
 ```javascript
