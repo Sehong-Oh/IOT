@@ -253,9 +253,33 @@ document.body.appendChild($ul);
 
 ### 예제 5-9
 ```javascript
+var fruits = ['apple', 'banana', 'peach'];
+var $ul = document.createElement('ul');
 
+var alertFruitBuilder = function(fruit) {
+	return function() {
+		alert('your choice is ' + fruit);
+	};
+};
+
+fruits.forEach(function(fruit) {
+	var $li = document.createElement('li');
+	$li.innerText = fruit;
+	$li.addEventListener('click', alertFruitBuilder(fruit));
+	$ul.appendChild($li);
+});
+
+document.body.appendChild($ul);
 ```
+코드 동작 설명:
+- 예제 5-7의 문제를 해결하는 또 다른 방법으로 클로저를 활용한다.
+- `alertFruitBuilder` 함수는 과일 이름을 인자로 받아 새로운 함수를 반환한다.
+- 반환된 함수는 클로저를 통해 인자로 받은 과일 이름을 기억하고 알림으로 표시한다.
+- 각 `<li>` 요소에 이벤트 리스너로 `alertFruitBuilder(fruit)`를 호출한 결과인 함수를 등록한다.
+- 클릭 이벤트 발생 시, 각 요소에 등록된 함수는 자신이 생성될 때 전달받은 과일 이름을 알림으로 표시한다.
 
+이 방식은 `bind` 메서드를 사용하는 예제 5-8과 유사한 결과를 가져오지만, 
+함수를 새로 생성하는 방식으로 더 유연하게 데이터를 캡슐화할 수 있다.
 
 ### 예제 5-10
 ```javascript
