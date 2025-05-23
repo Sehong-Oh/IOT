@@ -553,9 +553,31 @@ document.body.addEventListener(
 
 ### 예제 5-17
 ```javascript
+var curry3 = function(func) {
+	return function(a) {
+		return function(b) {
+			return func(a, b);
+		};
+	};
+};
 
+var getMaxWith10 = curry3(Math.max)(10);
+console.log(getMaxWith10(8));
+console.log(getMaxWith10(25));
+
+var getMinWith10 = curry3(Math.min)(10);
+console.log(getMinWith10(8));
+console.log(getMinWith10(25));
 ```
+활용 예제:
+1. `Math.max` 함수를 커링하여 `getMaxWith10` 함수를 생성한다.
+   - `getMaxWith10(8)`은 `Math.max(10, 8)`과 같으므로 10을 반환한다.
+   - `getMaxWith10(25)`는 `Math.max(10, 25)`와 같으므로 25를 반환한다.
+2. `Math.min` 함수를 커링하여 `getMinWith10` 함수를 생성한다.
+   - `getMinWith10(8)`은 `Math.min(10, 8)`과 같으므로 8을 반환한다.
+   - `getMinWith10(25)`는 `Math.min(10, 25)`와 같으므로 10을 반환한다.
 
+커링은 함수의 재사용성을 높이고 부분 적용된 함수를 쉽게 만들 수 있게 해준다.
 
 ### 예제 5-18
 ```javascript
