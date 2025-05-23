@@ -511,10 +511,10 @@ dog.greet('배고파요!');
 ```
 코드 동작 설명:
 - `Object.defineProperty`를 사용하여 전역 객체에 `_` 상수를 정의한다.
- - `value`: '_'의 값은 'EMPTY_SPACE' 문자열로 설정한다.
- - `writable: false`: 값을 변경할 수 없게 한다.
- - `configurable: false`: 속성을 삭제하거나 다시 정의할 수 없게 한다.
- - `enumerable: false`: 열거할 수 없게 하여 for...in 루프에서 나타나지 않게 한다.
+  - `value`: '_'의 값은 'EMPTY_SPACE' 문자열로 설정한다.
+  - `writable: false`: 값을 변경할 수 없게 한다.
+  - `configurable: false`: 속성을 삭제하거나 다시 정의할 수 없게 한다.
+  - `enumerable: false`: 열거할 수 없게 하여 for...in 루프에서 나타나지 않게 한다.
 - `partial2` 함수는 `partial`을 확장하여 플레이스홀더(`_`)를 지원한다.
 - 반환되는 함수는 호출 시 전달된 인자들을 플레이스홀더 위치에 순서대로 채운다.
 - `restArgs.shift()`를 사용하여 전달된 인자를 순서대로 플레이스홀더에 할당한다.
@@ -524,7 +524,10 @@ dog.greet('배고파요!');
 ```javascript
 
 ```
+- `mousemove` 이벤트에 500ms 디바운스를 적용한다.
+- `mousewheel` 이벤트에 700ms 디바운스를 적용한다.
 
+이 기법은 스크롤, 리사이즈, 검색 입력 등 빈번하게 발생하는 이벤트의 성능을 최적화하는 데 사용된다.
 
 ### 예제 5-17
 ```javascript
