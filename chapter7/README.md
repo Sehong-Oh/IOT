@@ -98,9 +98,29 @@ console.log(g);
 
 ### 예제 7-5
 ```javascript
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+var rect = new Rectangle(3, 4);
+console.log(rect.getArea());
 
+var Square = function(width) {
+	this.width = width;
+};
+Square.prototype.getArea = function() {
+	return this.width * this.width;
+};
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `Rectangle`과 `Square`를 별도의 생성자 함수로 정의한다.
+- 각각 독립적인 `getArea` 메서드를 가진다.
+- 상속 관계가 없는 두 개의 독립적인 클래스 구조이다.
 
 ### 예제 7-6
 ```javascript
