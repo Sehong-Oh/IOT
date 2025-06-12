@@ -138,9 +138,21 @@ arr.hasOwnProperty(2);
 
 ### 예제 6-8
 ```javascript
+var arr = [1, 2];
+Array.prototype.toString.call(arr); 
+Object.prototype.toString.call(arr); 
+arr.toString(); 
 
+arr.toString = function() {
+	return this.join('_');
+};
+arr.toString(); 
 ```
-
+코드 동작 설명:
+- `Array.prototype.toString`과 `Object.prototype.toString`의 동작 차이를 보여준다.
+- `Array.prototype.toString`은 배열 요소를 쉼표로 연결한 문자열을 반환한다.
+- `Object.prototype.toString`은 객체의 타입을 나타내는 문자열을 반환한다.
+- 인스턴스의 `toString` 메서드를 재정의하면 프로토타입의 메서드 대신 실행된다.
 
 ### 예제 6-9
 ```javascript
