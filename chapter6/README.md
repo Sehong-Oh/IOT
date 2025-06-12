@@ -156,9 +156,34 @@ arr.toString();
 
 ### 예제 6-9
 ```javascript
+Object.prototype.getEntries = function() {
+	var res = [];
+	for (var prop in this) {
+		if (this.hasOwnProperty(prop)) {
+			res.push([prop, this[prop]]);
+		}
+	}
+	return res;
+};
 
+var data = [
+	['object', { a: 1, b: 2, c: 3 }],
+	['number', 345],
+	['string', 'abc'],
+	['boolean',false],
+	['func', function() {}],
+	['array',[1, 2, 3]],
+];
+
+data.forEach(function(datum) {
+	console.log(datum[1].getEntries());
+});
 ```
-
+코드 동작 설명:
+- `Object.prototype`에 `getEntries` 메서드를 추가하여 모든 객체에서 사용할 수 있게 한다.
+- `getEntries`는 객체의 고유 프로퍼티를 `[key, value]` 형태의 배열로 반환한다.
+- 객체와 배열, 문자열은 열거 가능한 고유 프로퍼티를 가지므로 결과를 반환한다.
+- 숫자, 불린, 함수는 고유 프로퍼티가 없으므로 빈 배열을 반환한다.
 
 ### 예제 6-10
 ```javascript
