@@ -257,9 +257,30 @@ console.log(sq.getArea());
 
 ### 예제 7-10
 ```javascript
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
 
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+
+var Square = function(width) {
+	Rectangle.call(this, width, width);
+};
+
+Square.prototype = Object.create(Rectangle.prototype);
+Object.freeze(Square.prototype);
+
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `Object.create(Rectangle.prototype)`를 사용한 가장 깔끔한 상속 방법이다.
+- 부모 생성자를 실행하지 않고 프로토타입만 상속받는다.
+- `Object.freeze`로 프로토타입을 보호한다.
+- ES5에서 권장되는 프로토타입 상속 패턴이다.
 
 ### 예제 7-11
 ```javascript
