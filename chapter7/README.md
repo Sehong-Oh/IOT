@@ -218,9 +218,42 @@ console.log(sq.getArea());
 
 ### 예제 7-9
 ```javascript
+var extendClass2 = (function() {
+	var Bridge = function() {};
+	return function(SuperClass, SubClass, subMethods) {
+		Bridge.prototype = SuperClass.prototype;
+		SubClass.prototype = new Bridge();
+		if (subMethods) {
+			for (var method in subMethods) {
+				SubClass.prototype[method] = subMethods[method];
+			}
+		}
+		Object.freeze(SubClass.prototype);
+		return SubClass;
+	};
+})();
 
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+ 
+var Square = extendClass2(Rectangle, function(width) {
+	Rectangle.call(this, width, width);
+});
+
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `Bridge` 함수를 중간 다리로 사용하는 상속 패턴이다.
+- `Bridge.prototype`을 부모 클래스의 프로토타입으로 설정한다.
+- `new Bridge()`로 빈 객체를 생성하여 자식 클래스의 프로토타입으로 사용한다.
+- 부모 생성자의 실행 없이 프로토타입 체인만 연결하는 효율적인 방법이다.
 
 ### 예제 7-10
 ```javascript
