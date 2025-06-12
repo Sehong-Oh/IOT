@@ -152,9 +152,29 @@ console.log(sq.getArea());
 
 ### 예제 7-7
 ```javascript
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+var rect = new Rectangle(3, 4);
+console.log(rect.getArea());
 
+var Square = function(width) {
+	Rectangle.call(this, width, width);
+};
+Square.prototype = new Rectangle();
+
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `Square` 생성자에서 `Rectangle.call(this, width, width)`로 부모 생성자를 호출한다.
+- `Square.prototype = new Rectangle()`로 프로토타입 상속을 설정한다.
+- `Square`는 `Rectangle`의 메서드와 프로퍼티를 상속받는다.
+- 기본적인 프로토타입 상속 패턴을 보여준다.
 
 ### 예제 7-8
 ```javascript
