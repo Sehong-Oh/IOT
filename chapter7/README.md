@@ -178,9 +178,43 @@ console.log(sq.getArea());
 
 ### 예제 7-8
 ```javascript
+var extendClass1 = function(SuperClass, SubClass, subMethods) {
+	SubClass.prototype = new SuperClass();
+	for (var prop in SubClass.prototype) {
+		if (SubClass.prototype.hasOwnProperty(prop)) {
+			delete SubClass.prototype[prop];
+		}
+	}
+	if (subMethods) {
+		for (var method in subMethods) {
+			SubClass.prototype[method] = subMethods[method];
+		}
+	}
+	Object.freeze(SubClass.prototype);
+	return SubClass;
+};
 
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+
+var Square = extendClass1(Rectangle, function(width) {
+	Rectangle.call(this, width, width);
+});
+
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `extendClass1`은 클래스 상속을 위한 유틸리티 함수이다.
+- 부모 클래스의 인스턴스를 프로토타입으로 설정한 후 불필요한 프로퍼티를 삭제한다.
+- 추가 메서드가 있으면 프로토타입에 할당한다.
+- `Object.freeze`로 프로토타입을 불변으로 만든다.
 
 ### 예제 7-9
 ```javascript
