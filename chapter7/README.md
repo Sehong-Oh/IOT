@@ -49,9 +49,27 @@ var g = new Grade(100, 80);
 
 ### 예제 7-3
 ```javascript
+var Grade = function() {
+	var args = Array.prototype.slice.call(arguments);
+	for (var i = 0; i < args.length; i++) {
+		this[i] = args[i];
+	}
+	this.length = args.length;
+};
+Grade.prototype = [];
+var g = new Grade(100, 80);
 
+g.push(90);
+console.log(g);
+delete g.length;
+g.push(70);
+console.log(g);
 ```
-
+코드 동작 설명:
+- `g.push(90)`는 정상적으로 동작하여 인덱스 2에 90을 추가한다.
+- `delete g.length`로 `length` 프로퍼티를 삭제한다.
+- `g.push(70)` 실행 시 `length`가 없으므로 프로토타입의 `length`(0)를 참조한다.
+- 결과적으로 인덱스 0에 70이 덮어씌워지고 `length`가 1이 된다.
 
 ### 예제 7-4
 ```javascript
