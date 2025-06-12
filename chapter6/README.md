@@ -187,5 +187,18 @@ data.forEach(function(datum) {
 
 ### 예제 6-10
 ```javascript
+var Grade = function() {
+	var args = Array.prototype.slice.call(arguments);
+	for (var i = 0; i < args.length; i++) {
+		this[i] = args[i];
+	}
+	this.length = args.length;
+};
 
+var g = new Grade(100, 80);
 ```
+코드 동작 설명:
+- `Grade` 생성자 함수는 가변 인자를 받아 배열과 유사한 객체를 생성한다.
+- `Array.prototype.slice.call(arguments)`로 `arguments` 객체를 실제 배열로 변환한다.
+- 각 인자를 인덱스 프로퍼티로 할당하고 `length` 프로퍼티를 설정한다.
+- 결과적으로 배열과 유사한 구조의 객체가 생성된다.
