@@ -128,9 +128,13 @@ console.log(iu.getName());
 
 ### 예제 6-7
 ```javascript
-
+var arr = [1, 2];
+arr.push(3);
+arr.hasOwnProperty(2);
 ```
-
+- 배열 `arr`에 `push(3)`로 요소를 추가한다.
+- `hasOwnProperty(2)`로 인덱스 2가 배열의 고유 프로퍼티인지 확인한다.
+- 배열의 인덱스는 객체의 프로퍼티이므로 `true`를 반환한다.
 
 ### 예제 6-8
 ```javascript
