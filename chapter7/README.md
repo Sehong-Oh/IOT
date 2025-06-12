@@ -124,9 +124,31 @@ console.log(sq.getArea());
 
 ### 예제 7-6
 ```javascript
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+var rect = new Rectangle(3, 4);
+console.log(rect.getArea()); // 12
 
+var Square = function(width) {
+	this.width = width;
+	this.height = width;
+};
+Square.prototype.getArea = function() {
+	return this.width * this.height;
+};
+
+var sq = new Square(5);
+console.log(sq.getArea());
 ```
-
+코드 동작 설명:
+- `Square` 생성자에서 `width`와 `height`를 동일한 값으로 설정한다.
+- `Square`의 `getArea` 메서드는 `Rectangle`과 동일한 로직을 사용한다.
+- 코드 중복이 발생하지만 정사각형의 특성을 반영한 구현이다.
 
 ### 예제 7-7
 ```javascript
