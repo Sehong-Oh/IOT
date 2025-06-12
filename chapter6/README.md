@@ -19,7 +19,11 @@ Person.prototype.getName = function() {
 
 ### 예제 6-2
 ```javascript
-
+코드 동작 설명:
+- `Constructor` 생성자 함수는 `name` 프로퍼티를 설정한다.
+- 프로토타입에 `method1` 메서드와 `property1` 프로퍼티를 추가한다.
+- `new Constructor('Instance')`로 인스턴스를 생성한다.
+- `console.dir`을 통해 생성자 함수와 인스턴스의 구체적인 구조를 확인할 수 있다.
 ```
 
 ### 예제 6-3
