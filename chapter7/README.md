@@ -31,9 +31,21 @@ console.log(Rectangle.isRectangle(rect1));
 
 ### 예제 7-2
 ```javascript
+var Grade = function() {
+	var args = Array.prototype.slice.call(arguments);
+	for (var i = 0; i < args.length; i++) {
+		this[i] = args[i];
+	}
+	this.length = args.length;
+};
 
+Grade.prototype = [];
+var g = new Grade(100, 80);
 ```
-
+코드 동작 설명:
+- `Grade` 생성자 함수는 배열과 유사한 객체를 생성한다.
+- `Grade.prototype`을 빈 배열로 설정하여 배열 메서드를 상속받는다.
+- 인스턴스 `g`는 배열의 모든 메서드를 사용할 수 있게 된다.
 
 ### 예제 7-3
 ```javascript
