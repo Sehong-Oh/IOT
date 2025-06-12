@@ -73,9 +73,28 @@ console.log(g);
 
 ### 예제 7-4
 ```javascript
+var Grade = function() {
+	var args = Array.prototype.slice.call(arguments);
+	for (var i = 0; i < args.length; i++) {
+		this[i] = args[i];
+	}
+	this.length = args.length;
+};
+Grade.prototype = ['a', 'b', 'c', 'd'];
+var g = new Grade(100, 80);
 
+g.push(90);
+console.log(g);
+
+delete g.length;
+g.push(70);
+console.log(g);
 ```
-
+코드 동작 설명:
+- 프로토타입을 길이가 4인 배열로 설정한다.
+- `delete g.length` 후 `g.push(70)` 실행 시 프로토타입의 `length`(4)를 참조한다.
+- 인덱스 4에 70이 추가되고 `length`가 5가 된다.
+- 인덱스 3은 빈 상태로 남는다.
 
 ### 예제 7-5
 ```javascript
