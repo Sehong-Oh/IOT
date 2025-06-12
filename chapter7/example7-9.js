@@ -21,7 +21,7 @@ var Rectangle = function(width, height) {
 Rectangle.prototype.getArea = function() {
 	return this.width * this.height;
 };
-
+ 
 var Square = extendClass2(Rectangle, function(width) {
 	Rectangle.call(this, width, width);
 });
