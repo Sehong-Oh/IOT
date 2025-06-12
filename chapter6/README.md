@@ -28,7 +28,10 @@ Person.prototype.getName = function() {
 
 ### 예제 6-3
 ```javascript
-
+코드 동작 설명:
+- 배열 `arr`의 생성자 함수 참조를 다양한 방법으로 확인한다.
+- `Array.prototype.constructor`, `arr.__proto__.constructor`, `arr.constructor` 모두 `Array`를 가리킨다.
+- `arr.constructor`를 이용해 새로운 배열 `arr2`를 생성할 수 있다.
 ```
 
 
