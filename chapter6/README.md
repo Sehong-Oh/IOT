@@ -107,9 +107,24 @@ var p5 = new p1.constructor('사람5');               // Person { name: "사람5
 
 ### 예제 6-6
 ```javascript
+var Person = function(name) {
+	this.name = name;
+};
+Person.prototype.getName = function() {
+	return this.name;
+};
 
+var iu = new Person('지금');
+iu.getName = function() {
+	return '바로 ' + this.name;
+};
+
+console.log(iu.getName());
 ```
-
+코드 동작 설명:
+- `Person` 생성자로 `iu` 인스턴스를 생성한다.
+- 인스턴스의 `getName` 메서드를 재정의한다.
+- 메서드 호출 시 프로토타입의 메서드보다 인스턴스의 메서드가 우선적으로 실행된다.
 
 ### 예제 6-7
 ```javascript
