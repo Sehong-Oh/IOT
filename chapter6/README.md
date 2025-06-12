@@ -19,27 +19,70 @@ Person.prototype.getName = function() {
 
 ### 예제 6-2
 ```javascript
+var Constructor = function(name) {
+	this.name = name;
+};
+Constructor.prototype.method1 = function() {};
+Constructor.prototype.property1 = 'Constructor Prototype Property';
+
+var instance = new Constructor('Instance');
+console.dir(Constructor);
+console.dir(instance);
+```
 코드 동작 설명:
 - `Constructor` 생성자 함수는 `name` 프로퍼티를 설정한다.
 - 프로토타입에 `method1` 메서드와 `property1` 프로퍼티를 추가한다.
 - `new Constructor('Instance')`로 인스턴스를 생성한다.
 - `console.dir`을 통해 생성자 함수와 인스턴스의 구체적인 구조를 확인할 수 있다.
-```
 
 ### 예제 6-3
 ```javascript
+var arr = [1, 2];
+Array.prototype.constructor === Array;
+arr.__proto__.constructor === Array;
+arr.constructor === Array;
+
+var arr2 = new arr.constructor(3, 4);
+console.log(arr2);
+```
 코드 동작 설명:
 - 배열 `arr`의 생성자 함수 참조를 다양한 방법으로 확인한다.
 - `Array.prototype.constructor`, `arr.__proto__.constructor`, `arr.constructor` 모두 `Array`를 가리킨다.
 - `arr.constructor`를 이용해 새로운 배열 `arr2`를 생성할 수 있다.
-```
-
 
 ### 예제 6-4
 ```javascript
+var NewConstructor = function() {
+	console.log('this is new constuctor!');
+};
+var dataTypes = [
+	1,
+	'test',
+	true,
+	{},
+	[],
+	function() {},
+	/test/,
+	new Number(),   // NewConstructor & false
+	new String(),   // NewConstructor & false
+	new Boolean(),  // NewConstructor & false
+	new Object(),   // NewConstructor & false
+	new Array(),    // NewConstructor & false
+	new Function(), // NewConstructor & false
+	new RegExp(),   // NewConstructor & false
+	new Date(),     // NewConstructor & false
+	new Error(),    // NewConstructor & false
+];
 
+dataTypes.forEach(function(d) {
+	d.constructor = NewConstructor;
+	console.log(d.constructor.name, '&', d instanceof NewConstructor);
+});
 ```
-
+코드 동작 설명:
+- 다양한 데이터 타입들의 `constructor` 프로퍼티를 `NewConstructor`로 변경한다.
+- `constructor` 프로퍼티는 변경할 수 있지만 `instanceof` 연산자는 실제 프로토타입 체인을 확인한다.
+- 모든 경우에서 `d instanceof NewConstructor`는 `false`가 나온다.
 
 ### 예제 6-5
 ```javascript
