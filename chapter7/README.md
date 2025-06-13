@@ -284,9 +284,27 @@ console.log(sq.getArea());
 
 ### 예제 7-11
 ```javascript
-
+var extendClass1 = function(SuperClass, SubClass, subMethods) {
+	SubClass.prototype = new SuperClass();
+	for (var prop in SubClass.prototype) {
+		if (SubClass.prototype.hasOwnProperty(prop)) {
+			delete SubClass.prototype[prop];
+		}
+	}
+	SubClass.prototype.consturctor = SubClass;
+	if (subMethods) {
+		for (var method in subMethods) {
+			SubClass.prototype[method] = subMethods[method];
+		}
+	}
+	Object.freeze(SubClass.prototype);
+	return SubClass;
+};
 ```
-
+코드 동작 설명:
+- 7-8 예제에 `constructor` 프로퍼티 복원 기능을 추가했다.
+- `SubClass.prototype.consturctor = SubClass`로 생성자 참조를 수정한다.
+- `constructor` 프로퍼티가 올바른 생성자 함수를 가리키도록 보정한다.
 
 ### 예제 7-12
 ```javascript
