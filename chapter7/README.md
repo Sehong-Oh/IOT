@@ -308,8 +308,27 @@ var extendClass1 = function(SuperClass, SubClass, subMethods) {
 
 ### 예제 7-12
 ```javascript
-
+var extendClass2 = (function() {
+	var Bridge = function() {};
+	return function(SuperClass, SubClass, subMethods) {
+		Bridge.prototype = SuperClass.prototype;
+		SubClass.prototype = new Bridge();
+		SubClass.prototype.consturctor = SubClass;
+		Bridge.prototype.constructor = SuperClass;
+		if (subMethods) {
+			for (var method in subMethods) {
+				SubClass.prototype[method] = subMethods[method];
+			}
+		}
+		Object.freeze(SubClass.prototype);
+		return SubClass;
+	};
+})();
 ```
+코드 동작 설명:
+- 7-9 예제에 `constructor` 프로퍼티 복원 기능을 추가했다.
+- `SubClass.prototype.consturctor = SubClass`로 자식 클래스의 생성자를 설정한다.
+- `Bridge.prototype.constructor = SuperClass`로 부모 클래스의 생성자도 복원한다.
 
 
 ### 예제 7-13
