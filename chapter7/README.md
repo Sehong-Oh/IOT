@@ -353,9 +353,60 @@ var extendClass3 = function(SuperClass, SubClass, subMethods) {
 
 ### 예제 7-14
 ```javascript
+var extendClass = function(SuperClass, SubClass, subMethods) {
+	SubClass.prototype = Object.create(SuperClass.prototype);
+	SubClass.prototype.constructor = SubClass;
+	SubClass.prototype.super = function(propName) {
+		var self = this;
+		if (!propName)
+			return function() {
+				SuperClass.apply(self, arguments);
+			};
+		var prop = SuperClass.prototype[propName];
+		if (typeof prop !== 'function') return prop;
+		return function() {
+			return prop.apply(self, arguments);
+		};
+	}; 
+    
+	if (subMethods) {
+		for (var method in subMethods) {
+			SubClass.prototype[method] = subMethods[method];
+		}
+	}
+	Object.freeze(SubClass.prototype);
+	return SubClass;
+};
 
+var Rectangle = function(width, height) {
+	this.width = width;
+	this.height = height;
+};
+Rectangle.prototype.getArea = function() {
+	return this.width * this.height;
+};
+
+var Square = extendClass(
+	Rectangle,
+	function(width) {
+		this.super()(width, width);
+	},
+	{
+		getArea: function() {
+			console.log('size is :', this.super('getArea')());
+		},
+	}
+);
+
+var sq = new Square(10);
+sq.getArea();
+console.log(sq.super('getArea')());
 ```
-
+코드 동작 설명:
+- `super` 메서드를 추가하여 부모 클래스의 생성자와 메서드에 접근할 수 있게 한다.
+- `this.super()`는 부모 생성자를 호출하는 함수를 반환한다.
+- `this.super('methodName')`은 부모 클래스의 특정 메서드를 호출하는 함수를 반환한다.
+- ES6의 `super` 키워드와 유사한 기능을 ES5에서 구현한 것이다.
 
 ### 예제 7-15
 ```javascript
