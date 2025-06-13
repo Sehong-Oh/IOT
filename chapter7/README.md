@@ -410,9 +410,40 @@ console.log(sq.super('getArea')());
 
 ### 예제 7-15
 ```javascript
+var ES5 = function(name) {
+	this.name = name;
+};
+ES5.staticMethod = function() {
+	return this.name + ' staticMethod';
+};
+ES5.prototype.method = function() {
+	return this.name + ' method';
+};
+var es5Instance = new ES5('es5');
+console.log(ES5.staticMethod());
+console.log(es5Instance.method());
 
+var ES6 = class {
+	constructor(name) {
+		this.name = name;
+	}
+	static staticMethod() {
+		return this.name + ' staticMethod';
+	}
+	method() {
+		return this.name + ' method';
+	}
+};
+
+var es6Instance = new ES6('es6');
+console.log(ES6.staticMethod());
+console.log(es6Instance.method());
 ```
-
+코드 동작 설명:
+- ES5 생성자 함수 패턴과 ES6 클래스 문법을 비교한다.
+- ES5에서는 정적 메서드를 생성자 함수의 프로퍼티로 추가한다.
+- ES6에서는 `static` 키워드로 정적 메서드를 정의한다.
+- 두 방식 모두 동일한 결과를 생성하지만 ES6가 더 직관적이다.
 
 ### 예제 7-16
 ```javascript
