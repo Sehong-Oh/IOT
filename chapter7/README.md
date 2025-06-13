@@ -333,9 +333,23 @@ var extendClass2 = (function() {
 
 ### 예제 7-13
 ```javascript
-
+var extendClass3 = function(SuperClass, SubClass, subMethods) {
+	SubClass.prototype = Object.create(SuperClass.prototype);
+	SubClass.prototype.constructor = SubClass;
+	if (subMethods) {
+		for (var method in subMethods) {
+			SubClass.prototype[method] = subMethods[method];
+		}
+	}
+	Object.freeze(SubClass.prototype);
+	return SubClass;
+};
 ```
-
+코드 동작 설명:
+- `Object.create`를 사용한 가장 간단하고 명확한 상속 유틸리티이다.
+- `constructor` 프로퍼티를 올바르게 설정한다.
+- 추가 메서드가 있으면 프로토타입에 할당한다.
+- 권장되는 상속 패턴이다.
 
 ### 예제 7-14
 ```javascript
