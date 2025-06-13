@@ -447,5 +447,28 @@ console.log(es6Instance.method());
 
 ### 예제 7-16
 ```javascript
+var Rectangle = class {
+	constructor(width, height) {
+		this.width = width;
+		this.height = height;
+	}
+	getArea() {
+		return this.width * this.height;
+	}
+};
 
+var Square = class extends Rectangle {
+	constructor(width) {
+		super(width, width);
+	}
+	getArea() {
+		console.log('size is :', super.getArea());
+	}
+};
 ```
+코드 동작 설명:
+- ES6 클래스 상속 문법을 사용한다.
+- `extends` 키워드로 상속을 정의한다.
+- `super()`로 부모 생성자를 호출한다.
+- `super.methodName()`으로 부모 클래스의 메서드를 호출한다.
+- ES5의 복잡한 프로토타입 상속을 간단하고 직관적으로 대체한다.
